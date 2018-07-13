@@ -1,0 +1,153 @@
+<template>
+    <div class="project-home-div">
+      <head-component></head-component>
+      <div class="pro-home-content-div">
+        <div class="pro-home-head">
+          <div class="page-log">
+            <h2>项目</h2>
+            <h2>PROJECT</h2>
+          </div>
+          <!--<div class="filter-outer">-->
+            <!--<div class="filter-1-div">-->
+              <!--<div class="filter-button">全部</div>-->
+              <!--<div class="filter-button">城市</div>-->
+            <!--</div>-->
+            <!--<div class="search-button-div">-->
+              <!--<div class="search-button">搜索</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+        <div class="pro-home-outer-div">
+          <div class="add-new-pro-line">
+            <div class="add-new-pro-button">
+              <router-link to="addNewProject">
+                <span class="add-label">+</span>
+                <span>新增项目</span>
+              </router-link>
+            </div>
+          </div>
+          <div class="pro-one-container-div">
+              <project-one v-for="(item,key) in allProjectData.projectsMsg" :projectData="item" :key="key"></project-one>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<script>
+  import headComponent from "@/components/common/headComponent"
+  import projectOne from "@/components/allProject/projectOne"
+
+  export default {
+    name: "all-project",
+    components:{headComponent,projectOne},
+    data(){
+      return{
+        currentPage:1,
+        citiesId:"",
+        allProjectData:{},//查询出来的所有 project
+      }
+    },
+    beforeMount:function () {
+      this.getAllProject();
+    },
+    methods:{
+      getAllProject:function () {
+        var This = this;
+        this.axios({
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryProjectsByConditionsEdit.action",
+          method: "POST",
+          params: {
+            "userId": JSON.parse(sessionStorage.getItem("userInfo")).id,
+            "currentPage": This.currentPage,
+            "pageSize": 20,
+            "citiesId": This.citiesId
+          }
+        }).then(function (response) {
+          var data = response.data;
+          This.allProjectData = data;
+
+        });
+      },
+    }
+  }
+</script>
+
+<style scoped>
+  .pro-home-content-div{
+    width: 1200px;
+    margin: 0 auto;
+  }
+  .pro-home-head{
+    display: flex;
+    justify-content: space-between;
+    height: 75px;
+    align-items: stretch;
+
+    margin-top: 20px;
+  }
+  .page-log{
+    text-align: right;
+    color: #2b3541;
+    border-bottom: 2px solid ;
+  }
+  .page-log h2{
+    line-height: 40px;
+    margin: 0;
+    font-weight: 100;
+  }
+  .filter-outer,
+  .filter-1-div{
+    display: flex;
+    align-items: center;
+  }
+  .filter-1-div{
+    margin-right: 15px;
+  }
+  .filter-button{
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+  }
+  .filter-button:hover{
+    color: #ed6b1a;
+  }
+  .current-filter{
+    color: white;
+    background-color: #2b3541;
+  }
+  .search-button{
+    cursor: pointer;
+  }
+  .add-new-pro-line{
+    height: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .add-new-pro-button{
+    font-size: 16px;
+    color: #2b3541;
+    cursor: pointer;
+  }
+  .add-new-pro-button a{
+    text-decoration: none;
+    color: #2b3541;
+    display: flex;
+    align-items: center;
+  }
+  .add-label{
+    margin-right: 10px;
+    font-size: 30px;
+  }
+  .pro-one-container-div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+</style>
