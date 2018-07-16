@@ -7,7 +7,16 @@
         <div class="menu-list-style">
             <ul>
               <li v-if="roleId != 1">
-                <router-link to="/">项目</router-link>
+                <router-link to="/home">首页</router-link>
+              </li>
+              <li v-if="roleId != 1">
+                <router-link to="/addNewProject">新增项目</router-link>
+              </li>
+              <li v-if="roleId != 1">
+                <router-link to="/allProject">编辑已有项目</router-link>
+              </li>
+              <li v-if="roleId != 1">
+                <router-link to="/allProject">分析项目</router-link>
               </li>
               <li v-if="userName && userRole">
                 <span>{{userName}}</span>.<span>{{userRole}}</span>

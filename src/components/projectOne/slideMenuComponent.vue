@@ -1,92 +1,43 @@
 <template>
   <div class="menu-container-div">
     <div class="menu-head-div">
-      <img src="#" />
+      <img src="../../assets/common/menuImg.png" />
       <span>全部导航</span>
     </div>
     <div class="menu-content-div">
       <div class="one-level" v-for="(item,key) in menuData" :key="key">
-        <div class="one-level-name" @click="item.childShow=item.childShow?false:true">{{item.menuName}}</div>
+        <div class="one-level-name" @mousedown="item.childShow=item.childShow?false:true" @click="clickMenu(item.type,item.id)">{{item.menuName}}</div>
         <div class="two-level-div" v-for="(item2,key2) in item.menuChild" v-show="item.childShow" v-if="item.menuChild.length > 0" :key="key2">
-          <div class="two-level-name">
+          <div class="two-level-name" :class="(item2.type+'-'+item2.id) == currentMenuId?'current-menu-style':''" @click="clickMenu(item2.type,item2.id)">
             <div class="orange-circle"></div>
             <span>{{item2.menuName}}</span>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
     export default {
         name: "slide-menu-component",
+      props:["menuData","menuClick"],
       data(){
           return{
-            menuData:[
-              {
-                menuName:"商办项目调研报告",
-                menuChild:[],
-              },
-              {
-                menuName:"项目基本信息",
-                menuChild:[],
-              },
-              {
-                menuName:"分部分项造价比较表",
-                childShow:false,
-                menuChild:[
-                  {
-                    menuName:"汇总",
-                  },
-                  {
-                    menuName:"地下车库及设备用房",
-                  },
-                  {
-                    menuName:"地下商业",
-                  },
-                  {
-                    menuName:"地上商业",
-                  },
-                  {
-                    menuName:"地上办公",
-                  },
-                ],
-              },
-              {
-                menuName:"各专业指标及比较分析表",
-                childShow:false,
-                menuChild:[
-                  {
-                    menuName:"结构工程",
-                  },
-                  {
-                    menuName:"幕墙工程",
-                  },
-                  {
-                    menuName:"结构工程",
-                  },
-                  {
-                    menuName:"目前工程",
-                  },
-                  {
-                    menuName:"精装修工程",
-                  },
-                  {
-                    menuName:"室外景观工程",
-                  },
-                  {
-                    menuName:"综合机电工程",
-                  },
-                ],
-              }
-            ]
+            currentMenuId:""
           }
+      },
+      mounted:function () {
+          // console.log(JSON.stringify(this.menuData))
       },
       methods:{
         childShow:function(childShow){
-          console.log(childShow)
           childShow = childShow?false:true;
+        },
+        clickMenu:function (type,id) {
+          this.currentMenuId  = type+"-"+id;
+          this.$emit("menuClick",type,id);
         }
       }
     }
@@ -137,5 +88,8 @@
     border-radius: 100%;
     display: inline-block;
     margin:0 10px;
+  }
+  .current-menu-style{
+    background-color: #fbf0e9;
   }
 </style>

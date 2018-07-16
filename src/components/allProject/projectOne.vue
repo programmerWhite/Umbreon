@@ -54,14 +54,14 @@
           }
       },
       methods:{
-        goToProjectOne:function (projectId) {
-          this.$router.push({
-            name:"projectOne",
-            params:{
-              projectId:projectId
-            }
-          })
-        }
+          goToProjectOne:function (projectId) {
+            this.$router.push({
+              name:"projectOne",
+              params:{
+                projectId:projectId
+              }
+            })
+          }
       }
     }
 </script>

@@ -38,7 +38,7 @@
         </div>
         <div class="input-line-div">
           <div class="table-container-div">
-            <table-component :tableData="projectTableData" v-if="projectTableData.length > 0"></table-component>
+            <table-component  v-if="tableConfig.projectTableData.length > 0" :tableConfig="tableConfig"></table-component>
           </div>
         </div>
         <div class="input-line-div">
@@ -80,7 +80,6 @@
     data(){
       return{
         dataZone:[],//项目区域  数据
-        projectTableData:[],/*生成项目表格数据*/
         projectTitle:"",
         cityName:"",
         projectDesc:"",
@@ -89,6 +88,12 @@
         imgArray: [],
         imgData: {
           accept: 'image/gif, image/jpeg, image/png, image/jpg',
+        },
+        tableConfig:{
+          projectTableData:[],/*生成项目表格数据*/
+          sessionSwitch:true,
+          openEdit:true,
+          editStatus:true
         }
       }
     },
@@ -115,7 +120,7 @@
             var data = response.data;
             This.dataZone = data.segment;
 
-            This.projectTableData = JSON.parse(data.commonB0).rows;
+            This.tableConfig.projectTableData = JSON.parse(data.commonB0).rows;
         });
       },
       /*添加一个新项目*/
@@ -125,7 +130,7 @@
         var cityName = this.cityName;
         var description = this.projectDesc;
         var stageString = "";
-        var recordsCode = JSON.stringify(this.projectTableData);
+        var recordsCode = sessionStorage.getItem('tempProjectData')
 
         var dataZoneArray = [];
         for(var item of this.dataZone){
@@ -205,18 +210,30 @@
           "description":description
         };
 
+        var This = this;
+
         this.axios({
           url:this.$store.state.other.ipAddress + "/manages/manageprojects!addNewProject.action",
           method:"post",
+          headers:{
+            'Content-type': 'application/x-www-form-urlencoded'
+          },
           params:postData,
         }).then(function (response) {
 
-          This.$router.push({
-            name:"projectOne",
-            parmas:{
-              projectId:response.data.projectId
-            }
-          })
+          This.$store.dispatch('dialogParameter',{
+            type: "alert",
+            changeText: "项目创建成功，前去项目查看页面。",
+            button1: "确认",
+            button1CallBack:function () {
+              This.$router.push({
+                name:"projectOne",
+                params:{
+                  projectId:response.data.projectId
+                }
+              })
+            },
+          });
 
         });
 

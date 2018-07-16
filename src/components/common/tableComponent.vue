@@ -1,8 +1,8 @@
 <template>
   <div class="table-container-div">
     <div class="table-line-div" v-for="(item,key) in tempProjectData" :key="key">
-      <div class="table-cell-div" v-for="(item1,key1) in item.columns" :contenteditable="true" @blur="blurDivInput" :cows="key" :cols="key1"  :key="key1">{{!!item1.value?item1.value:"-"}}</div>
-      <div class="table-line-operation">
+      <div class="table-cell-div" v-for="(item1,key1) in item.columns" :contenteditable="tableConfig.editStatus" @blur="blurDivInput" :cows="key" :cols="key1"  :key="key1">{{!!item1.value?item1.value:"-"}}</div>
+      <div class="table-line-operation" v-show="tableConfig.editStatus">
         <span @click="addLine(key)">+</span>
         <span @click="deleteLine(key)">-</span>
       </div>
@@ -13,7 +13,7 @@
 <script>
     export default {
         name: "table-component",
-      props:["tableData"],
+      props:["tableConfig"],
       data(){
           return {
             tempProjectData:[]
@@ -22,10 +22,10 @@
       mounted:function () {
 
         var sessionData = sessionStorage.getItem('tempProjectData');
-        this.tempProjectData = this.cloneData(this.tableData);
+        this.tempProjectData = this.cloneData(this.tableConfig.projectTableData);
 
         var This = this;
-        if(sessionData){
+        if(sessionData && this.tableConfig.sessionSwitch){
           this.$store.dispatch("dialogParameter", {
             type: "confirm",
             changeText: "是否加载上次的表格数据。",
@@ -100,6 +100,7 @@
   .table-container-div{
     width: 100%;
     border: 1px solid #dedfe2;
+    box-sizing: border-box;
   }
   .table-line-div{
     display: flex;
@@ -136,7 +137,7 @@
     cursor: pointer;
     color: #ed6b1a;
     font-size: 20px;
-    padding: 10px;
+    padding:0 10px;
     font-weight: 800;
   }
 
