@@ -6,7 +6,8 @@
         <slide-menu-component :menuData="menuData" @menuClick="menuClick" v-if="menuData.length > 0"></slide-menu-component>
       </aside>
       <section class="pro-set-div">
-        <base-project :baseData="baseData" v-if="!!baseData"></base-project>
+        <base-project :baseData="baseData" v-if="!!baseData && componentType=='staticMenu' && componentId == '2'"></base-project>
+        <project-c-component :baseData="cTypeData" @reloadPage="reloadPage" :componentId="componentId" v-if="!!cTypeData && componentType=='seg' && componentId != '-1'"></project-c-component>
       </section>
     </div>
   </div>
@@ -16,39 +17,93 @@
   import headComponent from "@/components/common/headComponent"
   import slideMenuComponent from "@/components/projectOne/slideMenuComponent"
   import baseProject from "@/components/projectOne/baseProject"
+  import projectCComponent from "@/components/projectOne/projectCComponent"
 
   export default {
       name: "project-one",
-      components:{headComponent,slideMenuComponent,baseProject},
+      components:{headComponent,slideMenuComponent,baseProject,projectCComponent},
     data(){
         return{
           menuData:{},
-          baseData:null
+          currentComponent:baseProject,
+          baseData:null,
+          cTypeData:null,
+          componentType:"staticMenu",
+          componentId:"2"
         }
     },
     mounted:function () {
       this.getProjectData();
     },
     methods: {
+        reloadPage:function () {
+          this.menuClick(this.componentType,this.componentId);
+        },
       /*菜单组件调用 父组件的方法*/
       menuClick:function (type,id) {
+          this.componentType = type;
+          this.componentId = id;
           console.log(type+"-"+id)
-        },
+        if(type == "seg" && id == -1){
+          this.getSummaryData();
+        }else if(type == "seg" && id != -1){
+          this.getCData(id);
+        }else if(type == "d"){
+          this.getDData(id);
+        }
+      },
+      /*获取汇总信息*/
+      getSummaryData:function (id) {
+        this.axios({
+          method: "post",
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryOneStageSegmentMsg.action",
+          params: {"projectS_id":id}
+        }).then(function () {
+
+        });
+      },
+      /*获取C类数据 */
+      getCData(id){
+        var This = this;
+        this.axios({
+          method: "post",
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryOneStageSegmentMsg.action",
+          params: {"projectSS_id":id}
+        }).then(function (response) {
+          var data = response.data;
+          This.cTypeData = null;
+          setTimeout(function () {
+            This.cTypeData = data;
+          },0)
+        });
+      },
+      /*获取D类数据 */
+      getDData(id){
+        this.axios({
+          method: "post",
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryOneStageDMsg.action",
+          params: {"projectSD_id":id}
+        }).then(function () {
+
+        });
+      },
+      /*获取项目基本信息*/
       getProjectData: function () {
 
         var projectId = this.$route.params.projectId;
-
+        var projectS_id = this.$route.params.projectS_id;
         var This = this;
         this.axios({
           method: "post",
           url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryProjectBaseMsgOfOneProject.action",
-          params: {"projecId":projectId}
+          params: {"projecId":projectId,"projectS_id":projectS_id}
         }).then(function (response) {
           var data = response.data;
           This.dealMenuData(data.segmentList,data.dList);
           This.baseData = data.projectMsg;
         });
       },
+      /*处理菜单栏数据*/
       dealMenuData:function (segmentList,dList) {
         /*添加一个默认数据*/
         var tempSegment = [{

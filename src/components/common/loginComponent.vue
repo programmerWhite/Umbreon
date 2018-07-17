@@ -103,7 +103,7 @@
                     });
                   }else{
                     This.$router.push({
-                      name:'allProject',
+                      name:'home',
                       params:{}
                     });
                   }

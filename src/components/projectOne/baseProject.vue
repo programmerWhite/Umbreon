@@ -1,15 +1,6 @@
 <template>
   <div class="project-base-div">
-    <div class="base-pro-head-div">
-      <div class="project-name-status">
-        <span class="project-name-text">{{baseData.title}}</span>
-        <span class="project-status-text">待定</span>
-      </div>
-      <div class="project-status-div">
-        <span class="current-pro-status">状态：待提交</span>
-        <button class="change-status-button">提交</button>
-      </div>
-    </div>
+    <change-project-status @changeProjectStatus="changeProjectStatus"></change-project-status>
     <div class="picture-scroll-div" >
       <div class="change-photo-div" @click="popAddProShow=true">修改图片</div>
       <picture-scroll></picture-scroll>
@@ -66,12 +57,14 @@
 <script>
     import pictureScroll from "@/components/common/pictureScroll"
     import tableComponent from "@/components/common/tableComponent"
+    import changeProjectStatus from "@/components/projectOne/changeProjectStatus"
+
     import $ from "jquery"
 
     export default {
         name: "base-project",
       props:["baseData"],
-      components:{pictureScroll,tableComponent},
+      components:{pictureScroll,tableComponent,changeProjectStatus},
       data(){
           return {
             projectEditSwitch:false,//项目描述是否可以编辑开关
@@ -87,14 +80,19 @@
               sessionSwitch:false,
               openEdit:true,
               editStatus:false
-            }
+            },
+            userInfo:{}
           }
       },
       mounted:function () {
+        this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
         this.projectDescText = this.baseData.description;
         this.tableConfig.projectTableData = JSON.parse(this.baseData.recordsCode).rows;
       },
       methods:{
+        changeProjectStatus:function () {
+
+        },
         deletePhoto:function () {
 
         },
@@ -281,32 +279,7 @@
   .pro-button-line-div{
     margin-top: 20px;
   }
-  .base-pro-head-div{
-    height: 60px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 
-  }
-  .project-name-text{
-    color: #333333;
-    font-size: 20px;
-  }
-  .project-status-text{
-    color: #ed6b1a;
-    font-size: 20px;
-  }
-  .change-status-button{
-    border: 1px solid #ed6b1a;
-    border-radius: 15px;
-    box-sizing: border-box;
-    color: #ed6b1a;
-    width: 80px;
-    margin-left: 10px;
-    height: 30px;
-    cursor: pointer;
-  }
   .table-pro-head-div{
     background-color: #ed6b1a;
     color: white;

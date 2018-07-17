@@ -5,7 +5,7 @@
           <img src="../../assets/logImg.png" />
         </div>
         <div class="menu-list-style">
-            <ul>
+            <ul class="level-one-ul">
               <li v-if="roleId != 1">
                 <router-link to="/home">首页</router-link>
               </li>
@@ -20,6 +20,14 @@
               </li>
               <li v-if="userName && userRole">
                 <span>{{userName}}</span>.<span>{{userRole}}</span>
+                <ul class="level-two-ul">
+                  <li>
+                    <router-link to="/personalCenter">个人中心</router-link>
+                  </li>
+                  <li>
+                    <router-link to="/">退出登录</router-link>
+                  </li>
+                </ul>
               </li>
               <li v-else>
                 <router-link to="/">登录</router-link>
@@ -70,19 +78,47 @@
   .menu-list-style li{
     list-style-type: none;
     display: inline-block;
-    margin: 0 20px;
+    padding: 0 20px;
+    text-align: center;
     height: 60px;
     line-height: 60px;
     color: #2b3541;
     font-size: 16px;
     cursor: pointer;
   }
-  .menu-list-style li:hover{
+  .menu-list-style>ul>li:hover{
     border-bottom: 2px solid #2b3541;
     box-sizing: border-box;
   }
   .menu-list-style li a{
     text-decoration: navajowhite;
     color: #2b3541;
+  }
+  .level-two-ul{
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    display: none;
+    left: 0px;
+    box-shadow: 0 2px 10px 2px #cccccc;
+    border-radius: 4px;
+    z-index: 10;
+  }
+  .level-two-ul li{
+    width: inherit;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+  }
+
+  .level-two-ul>li:hover{
+    color: #ed6b1a;
+  }
+  .level-one-ul>li{
+    position: relative;
+  }
+
+  .level-one-ul>li:hover .level-two-ul{
+    display: block;
   }
 </style>

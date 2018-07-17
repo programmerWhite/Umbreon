@@ -1,5 +1,5 @@
 <template>
-    <div class="pro-one-div" @click="goToProjectOne(projectData.id)"  >
+    <div class="pro-one-div" @click="goToProjectOne(projectData.id,projectData.projectS_id)"  >
       <div class="pro-img-div">
         <img class="pro-img" src="#" />
       </div>
@@ -54,11 +54,12 @@
           }
       },
       methods:{
-          goToProjectOne:function (projectId) {
+          goToProjectOne:function (projectId,projectS_id) {
             this.$router.push({
               name:"projectOne",
               params:{
-                projectId:projectId
+                projectId:projectId,
+                projectS_id:projectS_id
               }
             })
           }

@@ -1,8 +1,8 @@
 <template>
     <div class="home-page-div">
       <head-component></head-component>
-      <div class="home-content-div">
-        <router-link to="/addNewProject">
+      <div class="home-content-div" :class="roleId != 2?'':'two-part'">
+        <router-link to="/addNewProject" v-if="roleId != 2">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/11.png"/>
             <div class="project-text">
@@ -11,7 +11,7 @@
             </div>
           </div>
         </router-link>
-        <router-link to="/addNewProject">
+        <router-link to="/allProject">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </router-link>
-        <router-link to="/addNewProject">
+        <router-link to="/allProject">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/33.png"/>
             <div class="project-text">
@@ -38,7 +38,13 @@
 
   export default {
       name: "home",
-      components:{headComponent}
+      components:{headComponent},
+    beforeMount:function () {
+      var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+      this.userName = userInfo.referredName;
+      this.userRole = userInfo.name;
+      this.roleId = userInfo.roleId;
+    }
 
   }
 </script>
@@ -83,5 +89,8 @@
   .project-text{
     padding: 60px 20px;
     box-sizing: border-box;
+  }
+  .two-part{
+    justify-content: space-around;
   }
 </style>

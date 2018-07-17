@@ -7,6 +7,7 @@ import allProject from '@/components/allProject/allProject'
 import projectOne from '@/components/projectOne/projectOne'
 import scanUserDetail from '@/components/userManage/scanUserDetail'
 import addNewProject  from '@/components/addProject/addNewProject.vue'
+import personalCenter  from '@/components/personalCenter/personalCenter.vue'
 
 Vue.use(Router)
 
@@ -33,7 +34,7 @@ var routerObj = new Router({
         component: allProject
       },
       {
-        path: '/projectOne/:projectId',
+        path: '/projectOne/:projectId/:projectS_id',
         name: 'projectOne',
         component: projectOne
       },
@@ -46,6 +47,11 @@ var routerObj = new Router({
         path: '/addNewProject',
         name: 'addNewProject',
         component: addNewProject
+      },
+      {
+        path: '/personalCenter',
+        name: 'personalCenter',
+        component: personalCenter
       }
     ]
 });
