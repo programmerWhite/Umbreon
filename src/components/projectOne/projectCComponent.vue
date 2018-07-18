@@ -2,13 +2,13 @@
   <div class="c-type-div">
     <change-project-status @changeProjectStatus="changeProjectStatus"></change-project-status>
     <div class="table-content-div">
-      <div class="project-h2">{{projectName}}</div>
+      <div class="project-h2">{{menuName}}</div>
       <div class="table-name">项目 CFA = <input class="input-type-head" typp="text" v-model="totalCFAArea"/> m2</div>
       <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.tableData"></table-component>
       <div class="table-line-div">
         <div class="table-cell-div" v-for="(item1,key1) in lastLine"  :key="key1">{{item1.value}}</div>
       </div>
-      <div class="pro-button-line-div" v-if="roleId==1">
+      <div class="pro-button-line-div" v-if="roleId==3">
         <button class="button-style" @click="editProTable('true')" v-show="!projectTableEditSwitch">编辑</button>
         <button class="button-style" @click="editProTable('false')" v-show="projectTableEditSwitch">取消</button>
         <button class="button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>
@@ -23,7 +23,7 @@
 
   export default {
         name: "project-c-component",
-        props:["baseData","componentId"],
+        props:["baseData","componentId","menuName"],
         components:{tableComponent,changeProjectStatus},
       data(){
           return{
@@ -32,23 +32,16 @@
             lastLine:null,
             totalCFAArea:null,
             currentTableData:null,
-            userInfo:{}
+            userInfo:{},
           }
       },
-      computed:{
-        projectName:function () {
-          if(this.componentId == 1){
-            return "地下车库及设备用房";
-          }else if(this.componentId == 2){
-            return "地下商业";
-          }else if(this.componentId == 3){
-            return "地上商业";
-          }else if(this.componentId == 4){
-            return "地上办公";
-          }
-        }
+      computed: {
+        roleId: function () {
+          return this.userInfo.roleId;
+        },
       },
       beforeMount:function () {
+          console.log(this.menuName)
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
         this.dealData();
         this.totalCFAArea = this.baseData.totalCFAArea;

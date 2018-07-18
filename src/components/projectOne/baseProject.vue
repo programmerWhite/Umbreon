@@ -18,14 +18,14 @@
       </div>
     </div>
     <div class="pro-base-table">
-      <div class="pro-table-head">项目基本信息表</div>
+      <div class="pro-table-head">{{menuName}}</div>
       <div class="table-container-div">
         <div class="table-pro-head-div">
           <div class="head-cols-1">序号</div>
           <div class="head-cols-2"></div>
         </div>
         <table-component :tableConfig="tableConfig" v-if="tableConfig.projectTableData.length > 0"></table-component>
-        <div class="pro-button-line-div">
+        <div class="pro-button-line-div" v-if="roleId==3">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
           <button class="desc-button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>
@@ -63,7 +63,7 @@
 
     export default {
         name: "base-project",
-      props:["baseData"],
+      props:["baseData","menuName"],
       components:{pictureScroll,tableComponent,changeProjectStatus},
       data(){
           return {
@@ -83,6 +83,11 @@
             },
             userInfo:{}
           }
+      },
+      computed: {
+        roleId: function () {
+          return this.userInfo.roleId;
+        },
       },
       mounted:function () {
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
@@ -278,6 +283,8 @@
   }
   .pro-button-line-div{
     margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .table-pro-head-div{
@@ -310,10 +317,6 @@
     z-index: 2;
     cursor: pointer;
     display: none;
-  }
-  .pro-button-line-div{
-    display: flex;
-    justify-content: flex-end;
   }
   .pro-desc-content-text{
     height: 105px;

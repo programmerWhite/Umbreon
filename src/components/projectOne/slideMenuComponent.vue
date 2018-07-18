@@ -6,9 +6,9 @@
     </div>
     <div class="menu-content-div">
       <div class="one-level" v-for="(item,key) in menuData" :key="key">
-        <div class="one-level-name" @mousedown="item.childShow=item.childShow?false:true" @click="clickMenu(item.type,item.id)">{{item.menuName}}</div>
+        <div class="one-level-name" @mousedown="item.childShow=item.childShow?false:true" @click="clickMenu(item.type,item.id,item.menuName)" >{{item.menuName}}</div>
         <div class="two-level-div" v-for="(item2,key2) in item.menuChild" v-show="item.childShow" v-if="item.menuChild.length > 0" :key="key2">
-          <div class="two-level-name" :class="(item2.type+'-'+item2.id) == currentMenuId?'current-menu-style':''" @click="clickMenu(item2.type,item2.id)">
+          <div class="two-level-name" :class="(item2.type+'-'+item2.id) == currentMenuId?'current-menu-style':''" @click="clickMenu(item2.type,item2.id,item2.menuName)">
             <div class="orange-circle"></div>
             <span>{{item2.menuName}}</span>
           </div>
@@ -35,9 +35,9 @@
         childShow:function(childShow){
           childShow = childShow?false:true;
         },
-        clickMenu:function (type,id) {
+        clickMenu:function (type,id,menuName) {
           this.currentMenuId  = type+"-"+id;
-          this.$emit("menuClick",type,id);
+          this.$emit("menuClick",type,id,menuName);
         }
       }
     }

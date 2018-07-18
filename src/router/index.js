@@ -1,13 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
-import home from '@/components/home'
-import userManage from '@/components/userManage/userManage'
-import allProject from '@/components/allProject/allProject'
-import projectOne from '@/components/projectOne/projectOne'
-import scanUserDetail from '@/components/userManage/scanUserDetail'
-import addNewProject  from '@/components/addProject/addNewProject.vue'
-import personalCenter  from '@/components/personalCenter/personalCenter.vue'
+// import home from '@/components/home'
+// import userManage from '@/components/userManage/userManage'
+// import allProject from '@/components/allProject/allProject'
+// import projectOne from '@/components/projectOne/projectOne'
+// import scanUserDetail from '@/components/userManage/scanUserDetail'
+// import addNewProject  from '@/components/addProject/addNewProject.vue'
+// import personalCenter  from '@/components/personalCenter/personalCenter.vue'
+
+
+const home = resolve => {
+  require.ensure(['@/components/home'], () => {
+    resolve(require('@/components/home'), 'home');
+  });
+};
+
+const userManage = resolve => {
+  require.ensure(['@/components/userManage/userManage'], () => {
+    resolve(require('@/components/userManage/userManage'), 'userManage');
+  });
+};
+
+const allProject = resolve => {
+  require.ensure(['@/components/allProject/allProject'], () => {
+    resolve(require('@/components/allProject/allProject'), 'allProject');
+  });
+};
+
+const projectOne = resolve => {
+  require.ensure(['@/components/projectOne/projectOne'], () => {
+    resolve(require('@/components/projectOne/projectOne'), 'projectOne');
+  });
+};
+
+const scanUserDetail = resolve => {
+  require.ensure(['@/components/userManage/scanUserDetail'], () => {
+    resolve(require('@/components/userManage/scanUserDetail'), 'scanUserDetail');
+  });
+};
+
+const addNewProject = resolve => {
+  require.ensure(['@/components/addProject/addNewProject.vue'], () => {
+    resolve(require('@/components/addProject/addNewProject.vue'), 'addNewProject');
+  });
+};
+
+const personalCenter = resolve => {
+  require.ensure(['@/components/personalCenter/personalCenter.vue'], () => {
+    resolve(require('@/components/personalCenter/personalCenter.vue'), 'personalCenter');
+  });
+};
+
 
 Vue.use(Router)
 

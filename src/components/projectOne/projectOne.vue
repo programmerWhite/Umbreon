@@ -6,8 +6,10 @@
         <slide-menu-component :menuData="menuData" @menuClick="menuClick" v-if="menuData.length > 0"></slide-menu-component>
       </aside>
       <section class="pro-set-div">
-        <base-project :baseData="baseData" v-if="!!baseData && componentType=='staticMenu' && componentId == '2'"></base-project>
-        <project-c-component :baseData="cTypeData" @reloadPage="reloadPage" :componentId="componentId" v-if="!!cTypeData && componentType=='seg' && componentId != '-1'"></project-c-component>
+        <base-project :baseData="baseData" :menuName="menuName" v-if="!!baseData && componentType=='staticMenu' && componentId == '2'"></base-project>
+        <project-c-component :baseData="cTypeData" :menuName="menuName" @reloadPage="reloadPage" :componentId="componentId" v-if="!!cTypeData && componentType=='seg' && componentId != '-1'"></project-c-component>
+        <summary-component :baseData="summaryData" :menuName="menuName" v-if="summaryData && componentType=='seg' && componentId == '-1'"></summary-component>
+        <project-d-component :baseData="dTypeData" :menuName="menuName" @reloadPage="reloadPage" v-if="!!dTypeData && componentType=='d'"></project-d-component>
       </section>
     </div>
   </div>
@@ -18,18 +20,23 @@
   import slideMenuComponent from "@/components/projectOne/slideMenuComponent"
   import baseProject from "@/components/projectOne/baseProject"
   import projectCComponent from "@/components/projectOne/projectCComponent"
+  import SummaryComponent from "@/components/projectOne/SummaryComponent"
+  import projectDComponent from "@/components/projectOne/projectDComponent"
 
   export default {
       name: "project-one",
-      components:{headComponent,slideMenuComponent,baseProject,projectCComponent},
+      components:{headComponent,slideMenuComponent,baseProject,projectCComponent,SummaryComponent,projectDComponent},
     data(){
         return{
           menuData:{},
           currentComponent:baseProject,
           baseData:null,
           cTypeData:null,
+          dTypeData:null,
+          summaryData:null,
           componentType:"staticMenu",
-          componentId:"2"
+          componentId:"2",
+          menuName:""
         }
     },
     mounted:function () {
@@ -37,29 +44,38 @@
     },
     methods: {
         reloadPage:function () {
-          this.menuClick(this.componentType,this.componentId);
+          this.menuClick(this.componentType,this.componentId,this.menuName);
         },
       /*菜单组件调用 父组件的方法*/
-      menuClick:function (type,id) {
-          this.componentType = type;
-          this.componentId = id;
-          console.log(type+"-"+id)
+      menuClick:function (type,id,menuName) {
+        console.log(arguments)
+        if(type == "staticMenu" && id == -1){
+          return false;
+        }
+
+        this.componentType = type;
+        this.componentId = id;
+        this.menuName = menuName;
+
         if(type == "seg" && id == -1){
-          this.getSummaryData();
+          var projectS_id = this.$route.params.projectS_id;
+          this.getSummaryData(projectS_id);
         }else if(type == "seg" && id != -1){
-          this.getCData(id);
+          this.getCData(id,menuName);
         }else if(type == "d"){
-          this.getDData(id);
+          this.getDData(id,menuName);
         }
       },
       /*获取汇总信息*/
       getSummaryData:function (id) {
+        var This = this;
         this.axios({
           method: "post",
-          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryOneStageSegmentMsg.action",
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryOneStageAllSegmentsMsg.action",
           params: {"projectS_id":id}
-        }).then(function () {
-
+        }).then(function (response) {
+          var data = response.data;
+          This.summaryData = data;
         });
       },
       /*获取C类数据 */
@@ -79,12 +95,17 @@
       },
       /*获取D类数据 */
       getDData(id){
+        var This = this;
         this.axios({
           method: "post",
           url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryOneStageDMsg.action",
           params: {"projectSD_id":id}
-        }).then(function () {
-
+        }).then(function (response) {
+            var data = response.data;
+          This.dTypeData = null;
+          setTimeout(function () {
+            This.dTypeData = data;
+          },0)
         });
       },
       /*获取项目基本信息*/

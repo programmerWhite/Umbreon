@@ -106,6 +106,10 @@
     display: flex;
     align-items: stretch;
     width: 100%;
+    border-bottom: 1px solid #cccccc;
+  }
+  .table-line-div:last-child{
+    border-bottom: none;
   }
   .table-cell-div,
   .table-line-operation{
