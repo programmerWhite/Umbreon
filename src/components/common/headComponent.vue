@@ -19,7 +19,10 @@
                 <router-link to="/allProject">分析项目</router-link>
               </li>
               <li v-if="userName && userRole">
-                <span>{{userName}}</span>.<span>{{userRole}}</span>
+                <div class="flex-style">
+                  <img class="user-photo-img" :src="userInfo.photograph">
+                  <span>{{userName}}</span>.<span>{{userRole}}</span>
+                </div>
                 <ul class="level-two-ul">
                   <li>
                     <router-link to="/personalCenter">个人中心</router-link>
@@ -45,14 +48,15 @@
           return{
             userName:"",
             userRole:"",
-            roleId:""
+            roleId:"",
+            userInfo:null,
           }
       },
       beforeMount:function () {
-        var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-        this.userName = userInfo.referredName;
-        this.userRole = userInfo.name;
-        this.roleId = userInfo.roleId;
+        this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        this.userName = this.userInfo.referredName;
+        this.userRole = this.userInfo.name;
+        this.roleId = this.userInfo.roleId;
       }
     }
 </script>
@@ -114,11 +118,26 @@
   .level-two-ul>li:hover{
     color: #ed6b1a;
   }
+  .level-one-ul{
+    display: flex;
+    align-items: stretch;
+  }
   .level-one-ul>li{
     position: relative;
   }
 
   .level-one-ul>li:hover .level-two-ul{
     display: block;
+  }
+  .user-photo-img{
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+  .flex-style{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
   }
 </style>
