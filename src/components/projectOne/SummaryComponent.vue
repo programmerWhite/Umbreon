@@ -1,6 +1,5 @@
 <template>
   <div class="summary-container-div">
-    <change-project-status @changeProjectStatus="changeProjectStatus"></change-project-status>
     <div class="summary-content-div">
       <div class="summary-head-div">
         <span>汇总</span>
@@ -13,13 +12,12 @@
 </template>
 
 <script>
-  import changeProjectStatus from "@/components/projectOne/changeProjectStatus"
   import summaryProduceLine from "@/components/projectOne/summaryProduceLine"
 
   export default {
     name: "summary-component",
     props:['baseData'],
-    components:{changeProjectStatus,summaryProduceLine},
+    components:{summaryProduceLine},
     data(){
       return{
         tableArray:[]

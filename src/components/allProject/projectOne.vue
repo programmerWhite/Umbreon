@@ -1,7 +1,7 @@
 <template>
     <div class="pro-one-div" @click="goToProjectOne(projectData.id,projectData.projectS_id)"  >
       <div class="pro-img-div">
-        <img class="pro-img" src="#" />
+        <img class="pro-img" :src="projectImg" :onerror="errorImg"/>
       </div>
       <div class="pro-name-div">{{projectData.title}}</div>
       <div class="pro-status-container">
@@ -10,7 +10,7 @@
             <span>{{item.stageTitle}} - </span>
             <span class="color-orange"> {{item.status}}</span>
           </div>
-          <img class="arrow-img" src="#" />
+          <img class="arrow-img" src="../../assets/project/arrow.png" />
         </div>
         <!--<div class="pro-status-one-line">-->
           <!--<div>-->
@@ -50,8 +50,14 @@
       props:["projectData"],
       data(){
           return {
-
+            errorImg:require('../../assets/project/projectImgError.png')
           }
+      },
+      computed:{
+        projectImg:function () {
+          var imgArray = this.projectData.photoes.split("#");
+          return imgArray[0]
+        }
       },
       methods:{
           goToProjectOne:function (projectId,projectS_id) {

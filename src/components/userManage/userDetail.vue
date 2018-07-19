@@ -159,7 +159,6 @@
         if(this.detailUserType == "scan"){
           this.projectData = this.cloneData(this.initProjectData);
         }else{
-          console.log(this.initProjectData)
           this.addProjectData = this.cloneData(this.initProjectData);
         }
       },

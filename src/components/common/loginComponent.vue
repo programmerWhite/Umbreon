@@ -84,7 +84,7 @@
                 if(data.result == 1){
 
                   This.$store.commit("changeToken",data.token);
-                  sessionStorage.setItem("token",JSON.stringify(data.token))
+                  sessionStorage.setItem("token",data.token)
 
                   sessionStorage.setItem("userInfo",JSON.stringify(data.userinfo))
 

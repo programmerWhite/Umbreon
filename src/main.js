@@ -43,7 +43,20 @@ axios.interceptors.response.use(function (response) {
     });
   }
 
-  if(response.data.messageType == 0 || !!response.data.exception){
+  if(response.data.messageType == 0 || response.data.messageCode == 100){
+    store.dispatch("dialogParameter",{
+      type:"alert",
+      changeText:"请重新登录系统，即将前往登录页面。",
+      button1:"确认",
+      button1CallBack:function () {
+        router.push({
+          name:"login"
+        })
+      }
+    });
+  }
+
+  if(response.data.messageType == 0 && response.data.messageCode != 100 || !!response.data.exception){
     store.dispatch("dialogParameter",{
       type:"alert",
       changeText:"系统异常，稍后再试。",

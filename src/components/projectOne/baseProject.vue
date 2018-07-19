@@ -1,21 +1,22 @@
 <template>
   <div class="project-base-div">
-    <change-project-status @changeProjectStatus="changeProjectStatus"></change-project-status>
     <div class="picture-scroll-div" >
       <div class="change-photo-div" @click="popAddProShow=true">修改图片</div>
-      <picture-scroll></picture-scroll>
+      <picture-scroll :scrollImgData="imgArray"></picture-scroll>
     </div>
     <div class="pro-desc-outer-div">
       <div class="pro-desc-head-div">
-        <div>{{baseData.title}}</div>
-        <div class="font-size-16">城市：{{baseData.cityName}}</div>
+        <div>
+          <input class="project-name-input-style" type="text" :disabled="!projectTableEditSwitch" v-model="baseData.title" />
+        </div>
+        <div class="font-size-16">城市：<input class="city-input-style" type="text" :disabled="!projectTableEditSwitch" v-model="baseData.cityName"/></div>
       </div>
-      <textarea class="pro-desc-content-text" :disabled="!projectEditSwitch" v-model="projectDescText"></textarea>
-      <div class="pro-button-line-div">
-        <button class="desc-button-style" @click="editProDesc(true)" v-show="!projectEditSwitch">编辑</button>
-        <button class="desc-button-style" @click="editProDesc(false)" @mousedown="initProjectDescText" v-show="projectEditSwitch">取消</button>
-        <button class="desc-button-style" v-show="projectEditSwitch">确认</button>
-      </div>
+      <textarea class="pro-desc-content-text" :disabled="!projectTableEditSwitch" v-model="projectDescText"></textarea>
+      <!--<div class="pro-button-line-div">-->
+        <!--<button class="desc-button-style" @click="editProDesc(true)" v-show="!projectEditSwitch">编辑</button>-->
+        <!--<button class="desc-button-style" @click="editProDesc(false)" @mousedown="initProjectDescText" v-show="projectEditSwitch">取消</button>-->
+        <!--<button class="desc-button-style" v-show="projectEditSwitch">确认</button>-->
+      <!--</div>-->
     </div>
     <div class="pro-base-table">
       <div class="pro-table-head">{{menuName}}</div>
@@ -24,11 +25,11 @@
           <div class="head-cols-1">序号</div>
           <div class="head-cols-2"></div>
         </div>
-        <table-component :tableConfig="tableConfig" v-if="tableConfig.projectTableData.length > 0"></table-component>
+        <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData.length > 0"></table-component>
         <div class="pro-button-line-div" v-if="roleId==3">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
-          <button class="desc-button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>
+          <button class="desc-button-style" v-show="projectTableEditSwitch" @click="saveProjectData">确认</button>
         </div>
       </div>
     </div>
@@ -36,7 +37,7 @@
       <div class="modify-project-photo">
         <div class="pop-head-div">修改图片</div>
         <div class="img-container-div">
-          <div class="img-photo-one" v-for="(item,key) in imgArray" :key="key">
+          <div class="img-photo-one" v-for="(item,key) in popImgArray" :key="key">
             <img class="upload-img" :src="item" />
             <img class="close-img" @click="deletePhoto(key)" src="../../assets/common/closeCircle.png" />
           </div>
@@ -45,8 +46,8 @@
           </div>
           </div>
         <div class="button-line-div">
-          <button class="pop-button-style" @click="popAddProShow=false">取消</button>
-          <button class="pop-button-style">确认</button>
+          <button class="pop-button-style" @click="cancelPopPhoto">取消</button>
+          <button class="pop-button-style" @click="changeProjectPhoto">确认</button>
         </div>
       </div>
     </div>
@@ -57,14 +58,13 @@
 <script>
     import pictureScroll from "@/components/common/pictureScroll"
     import tableComponent from "@/components/common/tableComponent"
-    import changeProjectStatus from "@/components/projectOne/changeProjectStatus"
 
     import $ from "jquery"
 
     export default {
         name: "base-project",
       props:["baseData","menuName"],
-      components:{pictureScroll,tableComponent,changeProjectStatus},
+      components:{pictureScroll,tableComponent},
       data(){
           return {
             projectEditSwitch:false,//项目描述是否可以编辑开关
@@ -75,6 +75,7 @@
             },
             projectDescText:"",
             imgArray:[],
+            popImgArray:[],
             tableConfig:{
               projectTableData:[],
               sessionSwitch:false,
@@ -89,18 +90,87 @@
           return this.userInfo.roleId;
         },
       },
-      mounted:function () {
+      beforeMount:function () {
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
         this.projectDescText = this.baseData.description;
-        this.tableConfig.projectTableData = JSON.parse(this.baseData.recordsCode).rows;
+
+        /*根据#关键字做拆分*/
+        if( this.baseData.photoes == ""){
+          var imgTemp = [];
+        }else{
+          var imgTemp = this.baseData.photoes.split('#');
+        }
+
+        this.imgArray = this.cloneData(imgTemp);
+        this.popImgArray = this.cloneData(imgTemp);
+
+        if(this.baseData.recordsCode == null){
+          this.tableConfig.projectTableData = [];
+        }else{
+          this.tableConfig.projectTableData = JSON.parse(this.baseData.recordsCode);
+        }
       },
       methods:{
         changeProjectStatus:function () {
 
         },
-        deletePhoto:function () {
-
+        /*用户点击学习修改项目图片*/
+        cancelPopPhoto:function(){
+          this.popAddProShow = false;
+          //还原 popImgArray 里面的图片数据
+          this.popImgArray = this.cloneData(this.imgArray);
         },
+        deletePhoto:function (index) {
+          this.popImgArray.splice(index,1);
+        },
+        /*上传修改后的数据*/
+        changeProjectPhoto:function () {
+          var photoes = this.popImgArray.join("#");
+          var projectId = this.$route.params.projectId;
+          var This = this;
+
+
+          if(photoes.length == 0){
+            this.$store.dispatch("dialogParameter", {
+              type: "alert",
+              changeText: "项目头像不能为空。",
+              button1: "确认",
+              button1CallBack:function () {
+
+              },
+            });
+            return false;
+          }
+
+          this.axios({
+            url:this.$store.state.other.ipAddress+"/manages/manageprojects!updatePhotoesOfOneProject.action",
+            method:"post",
+            params:{
+              projectId:projectId,
+              photoes:photoes
+            }
+          }).then(function (response) {
+            var data = response.data;
+            if(data.messageType == 1){
+              This.popAddProShow = false;
+
+              This.imgArray = [];
+              setTimeout(function () {
+                This.imgArray = This.cloneData(This.popImgArray);
+              },10);
+
+              This.$store.dispatch("dialogParameter", {
+                type: "alert",
+                changeText: "项目图片修改成功。",
+                button1: "确认",
+                button1CallBack:function () {
+
+                },
+              });
+            }
+          });
+        },
+        /*调用文件上传 input*/
         addImgToFile:function () {
           this.$refs.addImgInput.click();
         },
@@ -160,7 +230,7 @@
               crossDomain:true,
               contentType:false,
               success:function (data) {
-                This.imgArray.push(data.newURL);
+                This.popImgArray.push(data.newURL);
               },
               error:function () {
                 This.$store.dispatch("dialogParameter", {
@@ -176,6 +246,7 @@
 
           }
         },
+
         editProDesc:function (type) {
           this.projectEditSwitch = type;
         },
@@ -189,15 +260,107 @@
 
             var This = this;
             setTimeout(function () {
-              This.tableConfig.projectTableData = JSON.parse(This.baseData.recordsCode).rows;
+              This.tableConfig.projectTableData = JSON.parse(This.baseData.recordsCode);
             },0);
           }
         },
         initProjectDescText:function () {
           this.projectDescText = this.baseData.description;
         },
-        saveTableData:function () {
-          console.log(sessionStorage.getItem('tempProjectData'))
+        saveProjectData:function () {
+          var projectId = this.$route.params.projectId;
+          var title = this.baseData.title;
+
+          if(title == " " || title == ""){
+            this.$store.dispatch("dialogParameter", {
+              type: "alert",
+              changeText: "项目标题不能为空。",
+              button1: "确认",
+              button1CallBack:function () {
+
+              },
+            });
+            return false;
+          }
+
+          var cityName = this.baseData.cityName;
+          if(cityName == " " || cityName == ""){
+            this.$store.dispatch("dialogParameter", {
+              type: "alert",
+              changeText: "项目城市不能为空。",
+              button1: "确认",
+              button1CallBack:function () {
+
+              },
+            });
+            return false;
+          }
+
+          var description = this.projectDescText;
+
+          if(description.length < 50  || description > 500){
+            this.$store.dispatch("dialogParameter", {
+              type: "alert",
+              changeText: "项目描述内容请在50 到 500 字符之间。",
+              button1: "确认",
+              button1CallBack:function () {
+
+              },
+            });
+            return false;
+          }
+
+          var recordsCode = JSON.stringify(this.tableConfig.projectTableData);
+
+          var This = this;
+          this.axios({
+            url:this.$store.state.other.ipAddress+"/manages/manageprojects!updateOneProjectMsg.action",
+            method:"post",
+            params:{
+              "projectId":projectId,
+              "title":title,
+              "description":description,
+              "cityName":cityName,
+              "recordsCode":recordsCode
+            }
+          }).then(function (response) {
+            var data = response.data;
+            if(data.messageType == 1){
+              This.projectTableEditSwitch = false;
+              This.$store.dispatch("dialogParameter", {
+                type: "alert",
+                changeText: "项目内容修改成功",
+                button1: "确认",
+                button1CallBack:function () {
+
+                },
+              });
+            }
+          });
+        },
+        //表格中数据发送变化调用
+        dataChange:function (data) {
+          this.tableConfig.projectTableData = data;
+        },
+        /*深复制方法*/
+        cloneData:function (obj) {
+          var buf;
+          if(obj instanceof Array){
+            buf = [];
+            var i = obj.length;
+            while(i--){
+              buf[i] = this.cloneData(obj[i]);
+            }
+            return buf;
+          }else if(obj instanceof Object){
+            buf = {};
+            for(var k in obj){
+              buf[k] = this.cloneData(obj[k]);
+            }
+            return buf;
+          }else{
+            return obj;
+          }
         }
       }
     }
@@ -369,5 +532,31 @@
   }
   .font-size-16{
     font-size: 16px;
+  }
+  .city-input-style{
+    width: 80px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding:0 10px ;
+  }
+  .city-input-style:disabled{
+    background-color: white;
+    border: none;
+  }
+  .project-name-input-style{
+    width: 400px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding:0 10px ;
+  }
+  .project-name-input-style:disabled{
+    background-color: white;
+    border: none;
+    padding:0;
+
   }
 </style>

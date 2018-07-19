@@ -1,6 +1,5 @@
 <template>
   <div class="c-type-div">
-    <change-project-status @changeProjectStatus="changeProjectStatus"></change-project-status>
     <div class="table-content-div">
       <div class="project-h2">{{menuName}}</div>
       <div class="table-name">项目 CFA = <input class="input-type-head" typp="text" v-model="totalCFAArea"/> m2</div>
@@ -19,12 +18,11 @@
 
 <script>
   import tableComponent from "@/components/projectOne/tableComponent"
-  import changeProjectStatus from "@/components/projectOne/changeProjectStatus"
 
   export default {
         name: "project-c-component",
         props:["baseData","componentId","menuName"],
-        components:{tableComponent,changeProjectStatus},
+        components:{tableComponent},
       data(){
           return{
             tableConfig:{},
@@ -41,7 +39,6 @@
         },
       },
       beforeMount:function () {
-          console.log(this.menuName)
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
         this.dealData();
         this.totalCFAArea = this.baseData.totalCFAArea;

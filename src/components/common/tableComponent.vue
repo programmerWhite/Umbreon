@@ -89,7 +89,7 @@
             value:text
           };
           sessionStorage.setItem('tempProjectData',JSON.stringify(this.tempProjectData));
-
+          this.$emit('dataChange',this.tempProjectData);
         }
 
       }

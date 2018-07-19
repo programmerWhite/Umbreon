@@ -1,10 +1,9 @@
 <template>
   <div class="project-d-div">
-    <change-project-status @changeProjectStatus="changeProjectStatus"></change-project-status>
     <div class="pro-d-container">
       <div class="project-h2">{{menuName}}</div>
       <div class="table-container-div">
-        <table-component :tableConfig="tableConfig" v-if="tableConfig.projectTableData"></table-component>
+        <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData"></table-component>
         <div class="pro-button-line-div" v-if="roleId==3">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
@@ -17,13 +16,12 @@
 </template>
 
 <script>
-  import changeProjectStatus from "@/components/projectOne/changeProjectStatus"
   import tableComponent from "@/components/common/tableComponent"
 
   export default {
         name: "project-d-component",
     props:["baseData","menuName"],
-    components:{tableComponent,changeProjectStatus},
+    components:{tableComponent},
     data(){
       return{
         projectTableEditSwitch:false,
@@ -44,7 +42,7 @@
     beforeMount:function () {
       this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
         if(this.baseData.recordsCode){
-          var rowsData = JSON.parse(this.baseData.recordsCode).rows;
+          var rowsData = JSON.parse(this.baseData.recordsCode);
           this.tableConfig.projectTableData = rowsData;
         }else{
           this.tableConfig.projectTableData = [];
@@ -65,18 +63,23 @@
 
           var This = this;
           setTimeout(function () {
-            This.tableConfig.projectTableData = JSON.parse(This.baseData.recordsCode).rows;
+            This.tableConfig.projectTableData = JSON.parse(This.baseData.recordsCode);
           },0);
         }
       },
+      dataChange:function (data) {
+        this.tableConfig.projectTableData = data;
+      },
       saveTableData:function () {
         var This = this;
-        var tempData = sessionStorage.getItem('tempProjectData');
+        var tempData = JSON.stringify(this.tableConfig.projectTableData);
+        var recordsCode = tempData;
         this.axios({
           url:this.$store.state.other.ipAddress + '/manages/manageprojects!updateOneStageDMsg.action',
           method:"post",
           params:{
             projectSD_id:this.baseData.id,
+            recordsCode:recordsCode,
             recordsCode:tempData
           }
         }).then(function () {

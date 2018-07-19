@@ -210,9 +210,9 @@
           method:"post",
           params:{
             userId:This.userId,
-            realName:This.realName,
+            realName:This.nameText,
             oldPassword:This.oldPassword,
-            newPassword:This.newPassword
+            newPassword:This.newPassword,
           }
         }).then(function (response) {
           var data = response.data;

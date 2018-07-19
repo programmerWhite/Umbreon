@@ -5,13 +5,13 @@
     </div>
     <div class="project-status-div">
       <div  v-if="roleId==3">
-        <span class="current-pro-status">状态：待提交</span>
-        <button class="change-status-button" @click="clickButton(1)">提交</button>
+        <span class="current-pro-status">状态：{{statusText}}</span>
+        <button class="change-status-button" v-if="projectStatus==0||projectStatus==3" @click="clickButton(1)">提交</button>
       </div>
       <div  v-if="roleId==2">
-        <span class="current-pro-status">状态：待审核</span>
-        <button class="change-status-button" @click="clickButton(2)">审核通过</button>
-        <button class="change-status-button" @click="clickButton(3)">驳回</button>
+        <span class="current-pro-status">状态：{{statusText}}</span>
+        <button class="change-status-button" v-if="projectStatus==1" @click="clickButton(2)">审核通过</button>
+        <button class="change-status-button" v-if="projectStatus==1 || projectStatus==2 " @click="clickButton(3)">驳回</button>
       </div>
     </div>
   </div>
@@ -20,12 +20,21 @@
 <script>
     export default {
         name: "change-project-status",
+      props:["status"],
+      data(){
+        return{
+          projectStatus:null,
+          statusText:""
+        }
+      },
       computed: {
         roleId: function () {
           return this.userInfo.roleId;
         },
       },
       beforeMount:function () {
+        this.projectStatus = this.status.code;
+        this.statusText = this.status.message;
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
       },
       methods:{

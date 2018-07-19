@@ -38,7 +38,7 @@
         </div>
         <div class="input-line-div">
           <div class="table-container-div">
-            <table-component  v-if="tableConfig.projectTableData.length > 0" :tableConfig="tableConfig"></table-component>
+            <table-component  v-if="tableConfig.projectTableData.length > 0" @changeData="changeData" :tableConfig="tableConfig"></table-component>
           </div>
         </div>
         <div class="input-line-div">
@@ -120,8 +120,11 @@
             var data = response.data;
             This.dataZone = data.segment;
 
-            This.tableConfig.projectTableData = JSON.parse(data.commonB0).rows;
+            This.tableConfig.projectTableData = JSON.parse(data.commonB0);
         });
+      },
+      changeData:function (data) {
+        this.tableConfig.projectTableData = data;
       },
       /*添加一个新项目*/
       addNewProject:function () {
@@ -152,10 +155,10 @@
           return false;
         }
 
-        if(description == "" || description == " "){
+        if(description.length < 50 || description.length > 500){
           this.$store.dispatch("dialogParameter", {
             type: "alert",
-            changeText: "项目描述不能为空。",
+            changeText: "项目描述内容请在50 到 500 字符之间。",
             button1: "确认",
             button1CallBack:function () {
 
@@ -220,20 +223,24 @@
           },
           params:postData,
         }).then(function (response) {
+          var data = response.data;
 
-          This.$store.dispatch('dialogParameter',{
-            type: "alert",
-            changeText: "项目创建成功，前去项目查看页面。",
-            button1: "确认",
-            button1CallBack:function () {
-              This.$router.push({
-                name:"projectOne",
-                params:{
-                  projectId:response.data.projectId
-                }
-              })
-            },
-          });
+          if(data.result == 1){
+            This.$store.dispatch('dialogParameter',{
+              type: "alert",
+              changeText: "项目创建成功，前去项目查看页面。",
+              button1: "确认",
+              button1CallBack:function () {
+
+                  This.$router.push({
+                    name:"projectOne",
+                    params:{
+                      projectId:data.projectId
+                    }
+                  });
+              },
+            });
+          }
 
         });
 

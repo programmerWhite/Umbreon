@@ -1,7 +1,10 @@
 <template>
   <div class="picture-scroll-div">
-    <div class="picture-inner-div">
+    <div class="picture-inner-div" v-if="scrollImgArray.length > 0">
       <img class="scroll-img" :src="scrollImgArray[currentIndex]" />
+    </div>
+    <div class="no-project-img" v-else>
+      <span>暂时还没有项目图片,请添加。</span>
     </div>
     <div class="index-circle-div">
       <div class="circle-div" v-for="(item,key) in scrollImgArray" @click="changePictureIndex(key)" :class="key == currentIndex?'current-circle':''">{{key+1}}</div>
@@ -23,11 +26,6 @@
       beforeMount:function () {
           /*初始化数据*/
         this.scrollImgArray = this.scrollImgData;
-        this.scrollImgArray = [
-          'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531733503674&di=7556260b116b5e04d6d5e6506ba62e59&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01cfd156288aa76ac7254878e2c380.jpg',
-          "https://yiweifen.com/UploadFiles/haotu/20170804/4cu0pesmcaw643.jpg",
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1531733503675&di=ece9a5600d1da9b121fc50cb6bd4a42e&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F17%2F31%2F28%2F71B58PIC9Ia_1024.jpg"
-        ];
 
         var This = this;
         this.scrollTimer = setInterval(function () {
@@ -38,6 +36,9 @@
             This.currentIndex = 0;
           }
         },5000);
+      },
+      destroyed:function () {
+        clearInterval(this.scrollTimer);
       },
       methods: {
         changePictureIndex:function (index) {
@@ -83,5 +84,13 @@
   .current-circle{
     color: white;
     background-color: #6d6c6b;
+  }
+  .no-project-img{
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #333333;
   }
 </style>

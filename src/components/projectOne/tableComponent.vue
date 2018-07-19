@@ -20,7 +20,6 @@
     mounted:function () {
       this.editStatus = this.tableConfig.editStatus;
       this.tempProjectData = this.cloneData(this.tableConfig.tableData);
-      // console.log(this.tempProjectData)
     },
     methods:{
       /*深复制方法*/
