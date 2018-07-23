@@ -1,9 +1,5 @@
 <template>
   <div class="menu-container-div">
-    <div class="menu-head-div">
-      <img src="../../assets/common/menuImg.png" />
-      <span>全部导航</span>
-    </div>
     <div class="menu-content-div">
       <div class="one-level" v-for="(item,key) in menuData" :key="key">
         <div class="one-level-name" @mousedown="item.childShow=item.childShow?false:true" @click="clickMenu(item.type,item.id,item.menuName)" >{{item.menuName}}</div>
@@ -25,7 +21,7 @@
       props:["menuData","menuClick"],
       data(){
           return{
-            currentMenuId:""
+            currentMenuId:"",
           }
       },
       mounted:function () {
@@ -38,6 +34,10 @@
         clickMenu:function (type,id,menuName) {
           this.currentMenuId  = type+"-"+id;
           this.$emit("menuClick",type,id,menuName);
+          if(type == "staticMenu" && id == -1){
+            return false;
+          }
+          this.menuShowHide = false;
         }
       }
     }
@@ -50,21 +50,8 @@
     border-top: none;
     box-sizing: border-box;
   }
-  .menu-head-div{
-    height: 57px;
-    background-color: #ed6b1a;
-    padding-left: 20px;
-    box-sizing: border-box;
-  }
-  .menu-head-div{
-    display: flex;
-    align-items: center;
-    color: white;
-  }
-  .menu-head-div span{
-    margin-left: 20px;
-    font-size: 18px;
-  }
+
+
   .one-level-name{
     padding-left: 20px;
     color: #ed6b1a;
@@ -91,5 +78,8 @@
   }
   .current-menu-style{
     background-color: #fbf0e9;
+  }
+  .menu-content-div{
+    box-shadow: 0 2px 10px 2px #cccccc;
   }
 </style>

@@ -5,13 +5,13 @@
       </div>
       <div class="pro-name-div">{{projectData.title}}</div>
       <div class="pro-status-container">
-        <div class="pro-status-one-line" v-for="(item,key) in projectData.stageStatusList" :key="key">
-          <div>
-            <span>{{item.stageTitle}} - </span>
-            <span class="color-orange"> {{item.status}}</span>
-          </div>
-          <img class="arrow-img" src="../../assets/project/arrow.png" />
-        </div>
+        <!--<div class="pro-status-one-line" v-for="(item,key) in projectData.stageStatusList" :key="key">-->
+          <!--<div>-->
+            <!--<span>{{item.stageTitle}} - </span>-->
+            <!--<span class="color-orange"> {{item.status}}</span>-->
+          <!--</div>-->
+          <!--<img class="arrow-img" src="../../assets/project/arrow.png" />-->
+        <!--</div>-->
         <!--<div class="pro-status-one-line">-->
           <!--<div>-->
             <!--<span>设计阶段 - </span>-->
@@ -80,6 +80,7 @@
     overflow:hidden;
     cursor: pointer;
     padding-bottom: 20px;
+    margin-bottom: 20px;
   }
   .pro-one-div:hover{
     box-shadow: 0 0 10px 1px #cccccc;

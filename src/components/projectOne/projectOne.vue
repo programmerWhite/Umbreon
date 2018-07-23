@@ -1,11 +1,17 @@
 <template>
   <div class="project-one-container">
     <head-component></head-component>
+    <div class="head-men-button-line">
+      <div class="menu-head-div"  @click="menuShowHideF">
+        <img src="../../assets/common/menuImg.png" />
+        <span>全部导航</span>
+      </div>
+    </div>
     <div class="pro-one-content-div">
-      <aside class="pro-menu-container-div">
+      <aside class="pro-menu-container-div" v-if="menuShowHide">
         <slide-menu-component :menuData="menuData" @menuClick="menuClick" v-if="menuData.length > 0"></slide-menu-component>
       </aside>
-      <section class="pro-set-div">
+      <section class="pro-set-div" :style="{marginTop:(menuShowHide?'-50px':'0px')}">
         <change-project-status :status="projectStatus" v-if="projectStatus.code != null" @changeProjectStatus="changeProjectStatus"></change-project-status>
         <base-project :baseData="baseData" :menuName="menuName" v-if="!!baseData && componentType=='staticMenu' && componentId == '2'"></base-project>
         <project-c-component :baseData="cTypeData" :menuName="menuName" @reloadPage="reloadPage" :componentId="componentId" v-if="!!cTypeData && componentType=='seg' && componentId != '-1'"></project-c-component>
@@ -39,7 +45,8 @@
           componentType:"staticMenu",
           componentId:"2",
           menuName:"",
-          projectStatus:{}
+          projectStatus:{},
+          menuShowHide:true
         }
     },
     mounted:function () {
@@ -127,6 +134,7 @@
 
           This.projectStatus.code = data.status;
           This.projectStatus.message = data.statusName;
+          This.projectStatus.projectName = data.projectMsg.title;
         });
       },
       /*处理菜单栏数据*/
@@ -178,7 +186,7 @@
             },
             {
               menuName:"各专业指标及比较分析表",
-              childShow:false,
+              childShow:true,
               type:"staticMenu",
               id:-1,
               menuChild:tempDList,
@@ -264,6 +272,9 @@
           }
         });
       },
+      menuShowHideF:function () {
+        this.menuShowHide = this.menuShowHide?false:true
+      }
     }
   }
 </script>
@@ -278,10 +289,32 @@
   }
   .pro-menu-container-div{
     width: 250px;
+    background-color: white;
     flex-shrink: 0;
   }
   .pro-set-div{
-    margin-left: 10px;
     width: 100%;
+    margin-left: 10px;
+  }
+  .menu-head-div{
+    height: 57px;
+    width: 250px;
+    background-color: #ed6b1a;
+    padding-left: 20px;
+    box-sizing: border-box;
+  }
+  .menu-head-div{
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+  }
+  .menu-head-div span{
+    margin-left: 20px;
+    font-size: 18px;
+  }
+  .head-men-button-line{
+    width: 1200px;
+    margin: 0 auto;
   }
 </style>

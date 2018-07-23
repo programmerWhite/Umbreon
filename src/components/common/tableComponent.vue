@@ -1,7 +1,16 @@
 <template>
   <div class="table-container-div">
     <div class="table-line-div" v-for="(item,key) in tempProjectData" :key="key">
-      <div class="table-cell-div" v-for="(item1,key1) in item.columns" :contenteditable="tableConfig.editStatus" @blur="blurDivInput" :cows="key" :cols="key1"  :key="key1">{{!!item1.value?item1.value:"-"}}</div>
+      <div class="table-cell-div"
+           v-for="(item1,key1) in item.columns"
+           :contenteditable="tableConfig.editStatus"
+           @blur="blurDivInput"
+           :class="sortLineStyle(item1.value,key1)"
+           :cows="key"
+           :cols="key1"
+           :key="key1">
+        {{!!item1.value?dealHtmlData(item1.value):" "}}
+      </div>
       <div class="table-line-operation" v-show="tableConfig.editStatus">
         <span @click="addLine(key)">+</span>
         <span @click="deleteLine(key)">-</span>
@@ -16,7 +25,8 @@
       props:["tableConfig"],
       data(){
           return {
-            tempProjectData:[]
+            tempProjectData:[],
+
           }
       },
       mounted:function () {
@@ -85,18 +95,59 @@
           var rows = e.target.getAttribute('cows');
           var cols = e.target.getAttribute('cols');
 
+          if(cols == 0){
+            var currentClass = e.target.getAttribute('class');
+
+            currentClass = currentClass.replace(/text-right/g," ");
+            currentClass = currentClass.replace(/text-left/g," ");
+
+            currentClass += " "+ this.sortLineStyle(text,cols);
+            e.target.setAttribute('class',currentClass);
+          }
+
           this.tempProjectData[rows].columns[cols] = {
             value:text
           };
           sessionStorage.setItem('tempProjectData',JSON.stringify(this.tempProjectData));
           this.$emit('dataChange',this.tempProjectData);
-        }
 
+          e.target.innerText = this.dealHtmlData(text);
+        },
+
+        sortLineStyle:function (value,index) {
+          if(index == 0) {
+            if (value.indexOf('.') != -1) {
+              return "text-right";
+            } else {
+              var reg = new RegExp("[a-zA-Z]");
+              if (reg.test(value)) {
+                return "text-right";
+              } else {
+                return "text-left";
+              }
+            }
+          }else if(index == 1) {
+            return "text-left";
+          }
+        },
+        dealHtmlData:function (value) {
+          var reg = RegExp("^[0-9]{1,}.?[0-9]{0,}$");
+          if(!!reg.test(value)){
+            value = parseFloat(value);
+            value = value.toFixed(2);
+            value = parseFloat(value);
+            value = value.toLocaleString();
+            return value;//返回的是字符串23,245.12保留2位小数
+          }else{
+            return value;
+          }
+        },
       }
     }
 </script>
 
 <style scoped>
+
   .table-container-div{
     width: 100%;
     border: 1px solid #dedfe2;
@@ -127,7 +178,7 @@
     box-sizing: border-box;
   }
   .table-cell-div:first-child{
-    width: 100px;
+    width: 80px;
     flex-shrink: 0;
   }
   .table-cell-div:focus{
@@ -144,5 +195,15 @@
     padding:0 10px;
     font-weight: 800;
   }
-
+  .text-left{
+    justify-content: flex-start;
+    padding:0 20px;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  .text-right{
+    justify-content: flex-end;
+    padding:0 20px;
+    box-sizing: border-box;
+  }
 </style>

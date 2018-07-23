@@ -9,7 +9,7 @@
       <div class="notice-div"></div>
     </div>
     <div class="input-line-div">
-      <div class="input-label">用户名：</div>
+      <div class="input-label">密码：</div>
       <div class="input-outer-line">
         <img class="login-img-label" src="../../assets/login/inputP.png" />
         <input type="password" class="input-style" v-model="passwordV"/>
@@ -21,7 +21,7 @@
       <div class="remember-forget-line">
         <input type="checkbox" v-model="rememberCheck"/>
         <span class="remember-password">记住密码</span>
-        <span class="forget-password-button">忘记密码</span>
+        <!--<span class="forget-password-button">忘记密码</span>-->
       </div>
     </div>
   </div>

@@ -2,10 +2,16 @@
   <div class="c-type-div">
     <div class="table-content-div">
       <div class="project-h2">{{menuName}}</div>
-      <div class="table-name">项目 CFA = <input class="input-type-head" typp="text" v-model="totalCFAArea"/> m2</div>
+      <div class="table-name">
+        项目 CFA =
+        <input class="input-type-head"
+               :disabled="!projectTableEditSwitch"
+               typp="text"
+               v-model="totalCFAArea"/>
+        m2</div>
       <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.tableData"></table-component>
       <div class="table-line-div">
-        <div class="table-cell-div" v-for="(item1,key1) in lastLine"  :key="key1">{{item1.value}}</div>
+        <div class="table-cell-div" v-for="(item1,key1) in lastLine"  :key="key1">{{dealHtmlData(item1.value)}}</div>
       </div>
       <div class="pro-button-line-div" v-if="roleId==3">
         <button class="button-style" @click="editProTable('true')" v-show="!projectTableEditSwitch">编辑</button>
@@ -223,8 +229,21 @@
           }else{
             return obj;
           }
-        }
-      }
+        },
+        dealHtmlData:function (value) {
+          var reg = RegExp("^[0-9]{1,}.?[0-9]{0,}$");
+          if(!!reg.test(value)){
+            value = parseFloat(value);
+            value = value.toFixed(2);
+            value = parseFloat(value);
+            value = value.toLocaleString();
+            return value;//返回的是字符串23,245.12保留2位小数
+          }else{
+            return value;
+          }
+        },
+      },
+
     }
 </script>
 
@@ -233,8 +252,9 @@
     height: 50px;
     text-align: center;
     line-height: 50px;
-    color: white;
-    background-color: #ed6b1a;
+    color: #333333;
+    border: 1px solid #cccccc;
+    border-bottom: none;
   }
   .project-h2{
     margin: 10px 0;
@@ -286,13 +306,13 @@
   .input-type-head{
     border: none;
     background-color: rgba(0,0,0,0);
-    color: white;
+    color: #333333;
     width: 60px;
     text-align: center;
     padding:10px 0px;
     box-sizing: border-box;
   }
   .input-type-head:focus{
-    border: 1px solid white;
+    border: 1px solid #cccccc;
   }
 </style>

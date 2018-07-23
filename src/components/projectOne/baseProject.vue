@@ -21,10 +21,10 @@
     <div class="pro-base-table">
       <div class="pro-table-head">{{menuName}}</div>
       <div class="table-container-div">
-        <div class="table-pro-head-div">
-          <div class="head-cols-1">序号</div>
-          <div class="head-cols-2"></div>
-        </div>
+        <!--<div class="table-pro-head-div">-->
+          <!--<div class="head-cols-1">序号</div>-->
+          <!--<div class="head-cols-2"></div>-->
+        <!--</div>-->
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData.length > 0"></table-component>
         <div class="pro-button-line-div" v-if="roleId==3">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
@@ -451,9 +451,9 @@
   }
 
   .table-pro-head-div{
-    background-color: #ed6b1a;
-    color: white;
-    border: 1px solid #ed6b1a;
+    /*background-color: #ed6b1a;*/
+    color: #ed6b1a;
+    border: 1px solid #cccccc;
   }
   .head-cols-1{
     width: 100px;

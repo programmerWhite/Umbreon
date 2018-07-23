@@ -1,7 +1,7 @@
 <template>
   <div class="base-pro-head-div">
     <div class="project-name-status">
-      <!--<span class="project-name-text">{{baseData.title}}</span>-->
+      <span class="project-name-text">{{status.projectName}}</span>
     </div>
     <div class="project-status-div">
       <div  v-if="roleId==3">

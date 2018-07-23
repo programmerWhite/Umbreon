@@ -37,8 +37,8 @@
             let tempArray = [
               {
                 value:"序号",
-                bgColor:"#ed6b1a",
-                color:"white"
+                bgColor:"#white",
+                color:"#333333"
               },
               {
                 value:"",
@@ -59,7 +59,7 @@
             let tempArray = [
               {
                 value:"",
-                bgColor:"#ed6b1a",
+                bgColor:"white",
                 color:"white"
               },
               {
@@ -82,7 +82,7 @@
             let tempArray = [
               {
                 value:data[i].segmentName,
-                bgColor:"#ed6b1a",
+                bgColor:"#333333",
                 color:"white"
               },
               {
@@ -90,11 +90,11 @@
                   {
                     value:"单方造价<br/><span style='font-size: 10px'>(RMB/m2)</span>",
                     bgColor:"white",
-                    color:"#ed6b1a"
+                    color:"#333333"
                   },{
                     value:"总价<br/><span style='font-size: 10px'>(RMB)</span>",
                     bgColor:"white",
-                    color:"#ed6b1a"
+                    color:"#333333"
                   }
                 ]
               }

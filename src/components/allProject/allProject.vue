@@ -2,30 +2,15 @@
     <div class="project-home-div">
       <head-component></head-component>
       <div class="pro-home-content-div">
-        <div class="pro-home-head">
-          <div class="page-log">
-            <h2>项目</h2>
-            <h2>PROJECT</h2>
-          </div>
-          <!--<div class="filter-outer">-->
-            <!--<div class="filter-1-div">-->
-              <!--<div class="filter-button">全部</div>-->
-              <!--<div class="filter-button">城市</div>-->
-            <!--</div>-->
-            <!--<div class="search-button-div">-->
-              <!--<div class="search-button">搜索</div>-->
+        <div class="pro-home-outer-div">
+          <!--<div class="add-new-pro-line">-->
+            <!--<div class="add-new-pro-button">-->
+              <!--<router-link to="addNewProject">-->
+                <!--<span class="add-label">+</span>-->
+                <!--<span>新增项目</span>-->
+              <!--</router-link>-->
             <!--</div>-->
           <!--</div>-->
-        </div>
-        <div class="pro-home-outer-div">
-          <div class="add-new-pro-line">
-            <div class="add-new-pro-button">
-              <router-link to="addNewProject">
-                <span class="add-label">+</span>
-                <span>新增项目</span>
-              </router-link>
-            </div>
-          </div>
           <div class="pro-one-container-div">
               <project-one v-for="(item,key) in allProjectData.projectsMsg" :projectData="item" :key="key"></project-one>
           </div>
@@ -148,6 +133,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 20px 0;
   }
 
 </style>

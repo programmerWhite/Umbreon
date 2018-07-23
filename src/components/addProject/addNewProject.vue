@@ -2,38 +2,38 @@
   <div class="add-project-page-div">
     <head-component></head-component>
     <div class="add-new-pro-div">
-      <div class="pro-home-head">
-        <div class="page-log">
-          <h2>新增项目</h2>
-          <h2 class="font-size-18">NEW Project</h2>
-        </div>
-      </div>
+
       <div class="add-new-content-div">
-        <div class="input-line-div">
-          <div class="input-label">项目名称：</div>
-          <div class="input-outer-div">
-            <input type="text" class="input-style" v-model="projectTitle"/>
-          </div>
-        </div>
-        <div class="input-line-div flex-start">
-          <div class="input-label">项目描述：</div>
-          <div class="input-outer-div">
-            <textarea type="text" class="text-area-style" v-model="projectDesc"></textarea>
-          </div>
-        </div>
-        <div class="input-line-div">
-          <div class="input-label">城市：</div>
-          <div class="input-outer-div">
-            <input type="text" class="input-style" v-model="cityName"/>
-          </div>
-        </div>
-        <div class="input-line-div flex-start">
-          <div class="input-label">项目区域：</div>
-          <div class="input-outer-div display-flex-style width-540">
-            <div class="check-zone-container" v-for="(item,key) in dataZone">
-              <div class="no-choice-div" :class="item.isVisible==1?'choice-div':''" :index="key" @click="changeNewVisible"></div>
-              <div class="project-name">{{item.title}}</div>
+
+        <div class="flex-style">
+          <div class="input-line-div">
+            <div class="input-label">项目名称：</div>
+            <div class="input-outer-div">
+              <input type="text" class="input-style" v-model="projectTitle"/>
             </div>
+          </div>
+
+          <div class="input-line-div">
+            <div class="input-label">城市：</div>
+            <div class="input-outer-div">
+              <input type="text" class="input-style" v-model="cityName"/>
+            </div>
+          </div>
+          <div class="input-line-div flex-start" style="align-items: center">
+            <div class="input-label">项目区域：</div>
+            <div class="input-outer-div display-flex-style width-540" style="width: 600px">
+              <div class="check-zone-container" v-for="(item,key) in dataZone" >
+                <div class="no-choice-div" :class="item.isVisible==1?'choice-div':''" :index="key" @click="changeNewVisible"></div>
+                <div class="project-name">{{item.title}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-line-div flex-start">
+          <div class="input-label" style="width:100px">项目描述：</div>
+          <div class="input-outer-div" style="width: 100%">
+            <textarea type="text" class="text-area-style" v-model="projectDesc"></textarea>
           </div>
         </div>
         <div class="input-line-div">
@@ -337,7 +337,7 @@
 
 <style scoped>
   .add-new-content-div{
-    width: 935px;
+    width: 100%;
     margin: 0 auto;
   }
   .pro-home-head{
@@ -376,12 +376,11 @@
     margin-top: 30px;
   }
   .input-label{
-    width: 150px;
     text-align: right;
+    padding: 0 10px;
   }
   .input-style{
     height: 40px;
-    width: 540px;
     padding-left: 20px;
     box-sizing: border-box;
     border: 1px solid #cccccc;
@@ -389,7 +388,7 @@
   }
   .text-area-style{
     height: 120px;
-    width: 540px;
+    width: 100%;
     resize: none;
     padding: 10px;
     box-sizing: border-box;
@@ -411,7 +410,7 @@
     height: 16px;
     width: 16px;
     border-radius: 2px;
-    margin-left: 20px;
+    margin-left: 10px;
     cursor: pointer;
     background: url("../../assets/common/noChoice.png");
   }
@@ -424,7 +423,7 @@
     font-size: 14px;
   }
   .check-zone-container{
-    width: 120px;
+    width: 95px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -457,7 +456,8 @@
     font-size: 18px !important;
   }
   .table-container-div{
-    width: 100%;
+    width: 980px;
+    margin: 0 auto;
   }
   .add-photo-container-div{
     min-height: 140px;
@@ -515,5 +515,9 @@
   }
   .img-photo-one:nth-child(4n){
     margin-right: 0px;
+  }
+  .flex-style{
+    display: flex;
+    flex-wrap: nowrap;
   }
 </style>

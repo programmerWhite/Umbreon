@@ -1,7 +1,14 @@
 <template>
   <div class="table-container-div">
     <div class="table-line-div" v-for="(item,key) in tempProjectData" :key="key">
-      <div class="table-cell-div" v-for="(item1,key1) in item" :contenteditable="item1.edit && editStatus" @blur="blurDivInput" :cows="key" :cols="key1" :key="key1" :dataType="item1.type">{{item1.value}}</div>
+      <div class="table-cell-div"
+           v-for="(item1,key1) in item"
+           :contenteditable="item1.edit && editStatus"
+           @blur="blurDivInput"
+           :cows="key"
+           :cols="key1"
+           :key="key1"
+           :dataType="item1.type">{{dealHtmlData(item1.value)}}</div>
     </div>
   </div>
 </template>
@@ -81,12 +88,24 @@
             }
           }
 
-          e.target.innerText = text;
+          e.target.innerText = this.dealHtmlData(text);
         }
 
         this.tempProjectData[rows][cols].value = text;
 
         this.$emit("dataChange",this.tempProjectData);
+      },
+      dealHtmlData:function (value) {
+        var reg = RegExp("^[0-9]{1,}.?[0-9]{0,}$");
+        if(!!reg.test(value)){
+          value = parseFloat(value);
+          value = value.toFixed(2);
+          value = parseFloat(value);
+          value = value.toLocaleString();
+          return value;//返回的是字符串23,245.12保留2位小数
+        }else{
+          return value;
+        }
       },
     }
   }
