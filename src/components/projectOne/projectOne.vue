@@ -114,6 +114,9 @@
           This.dTypeData = null;
           setTimeout(function () {
             This.dTypeData = data;
+            This.dTypeData.type = This.componentType;
+            This.dTypeData.id = This.componentId;
+
           },0)
         });
       },

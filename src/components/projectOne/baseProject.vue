@@ -1,23 +1,6 @@
 <template>
   <div class="project-base-div">
-    <div class="picture-scroll-div" >
-      <div class="change-photo-div" @click="popAddProShow=true">修改图片</div>
-      <picture-scroll :scrollImgData="imgArray"></picture-scroll>
-    </div>
-    <div class="pro-desc-outer-div">
-      <div class="pro-desc-head-div">
-        <div>
-          <input class="project-name-input-style" type="text" :disabled="!projectTableEditSwitch" v-model="baseData.title" />
-        </div>
-        <div class="font-size-16">城市：<input class="city-input-style" type="text" :disabled="!projectTableEditSwitch" v-model="baseData.cityName"/></div>
-      </div>
-      <textarea class="pro-desc-content-text" :disabled="!projectTableEditSwitch" v-model="projectDescText"></textarea>
-      <!--<div class="pro-button-line-div">-->
-        <!--<button class="desc-button-style" @click="editProDesc(true)" v-show="!projectEditSwitch">编辑</button>-->
-        <!--<button class="desc-button-style" @click="editProDesc(false)" @mousedown="initProjectDescText" v-show="projectEditSwitch">取消</button>-->
-        <!--<button class="desc-button-style" v-show="projectEditSwitch">确认</button>-->
-      <!--</div>-->
-    </div>
+
     <div class="pro-base-table">
       <div class="pro-table-head">{{menuName}}</div>
       <div class="table-container-div">
@@ -26,6 +9,25 @@
           <!--<div class="head-cols-2"></div>-->
         <!--</div>-->
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData.length > 0"></table-component>
+
+        <div class="picture-scroll-div" >
+          <div class="change-photo-div" @click="popAddProShow=true">修改图片</div>
+          <picture-scroll :scrollImgData="imgArray"></picture-scroll>
+        </div>
+        <div class="pro-desc-outer-div">
+          <div class="pro-desc-head-div">
+            <div>
+              <input class="project-name-input-style" type="text" :disabled="!projectTableEditSwitch" v-model="baseData.title" />
+            </div>
+            <div class="font-size-16">城市：<input class="city-input-style" type="text" :disabled="!projectTableEditSwitch" v-model="baseData.cityName"/></div>
+          </div>
+          <textarea class="pro-desc-content-text" :disabled="!projectTableEditSwitch" v-model="projectDescText"></textarea>
+          <!--<div class="pro-button-line-div">-->
+          <!--<button class="desc-button-style" @click="editProDesc(true)" v-show="!projectEditSwitch">编辑</button>-->
+          <!--<button class="desc-button-style" @click="editProDesc(false)" @mousedown="initProjectDescText" v-show="projectEditSwitch">取消</button>-->
+          <!--<button class="desc-button-style" v-show="projectEditSwitch">确认</button>-->
+          <!--</div>-->
+        </div>
         <div class="pro-button-line-div" v-if="roleId==3">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
@@ -463,6 +465,7 @@
     height: 290px;
     width: 100%;
     position: relative;
+    margin-top: 30px;
   }
   .picture-scroll-div:hover .change-photo-div{
     display: block;
@@ -528,7 +531,7 @@
   .pro-base-table{
     font-size: 20px;
     line-height: 30px;
-    margin-top: 20px;
+    margin-top: 0px;
   }
   .font-size-16{
     font-size: 16px;

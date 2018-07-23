@@ -3,7 +3,10 @@
       <div class="pro-img-div">
         <img class="pro-img" :src="projectImg" :onerror="errorImg"/>
       </div>
-      <div class="pro-name-div">{{projectData.title}}</div>
+      <div class="pro-name-div">
+        {{projectData.title}}
+        <span class="color-orange">{{projectData.stageStatusList[0].status}}</span>
+      </div>
       <div class="pro-status-container">
         <!--<div class="pro-status-one-line" v-for="(item,key) in projectData.stageStatusList" :key="key">-->
           <!--<div>-->
@@ -12,6 +15,7 @@
           <!--</div>-->
           <!--<img class="arrow-img" src="../../assets/project/arrow.png" />-->
         <!--</div>-->
+
         <!--<div class="pro-status-one-line">-->
           <!--<div>-->
             <!--<span>设计阶段 - </span>-->
@@ -94,6 +98,8 @@
     color: #333333;
     padding: 10px 20px;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
   }
   .pro-status-container{
     box-sizing: border-box;

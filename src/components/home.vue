@@ -15,7 +15,7 @@
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">
-              <div class="name-text">编辑已有项目</div>
+              <div class="name-text">现有项目</div>
               <div class="desc-text">你可以在这里对已有项目的介绍及数据修改</div>
             </div>
           </div>
@@ -24,7 +24,7 @@
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/33.png"/>
             <div class="project-text">
-              <div class="name-text">分析项目</div>
+              <div class="name-text">项目成本分析</div>
               <div class="desc-text">你可以在这里对已有项目的介绍及数据进行分析查看</div>
             </div>
           </div>

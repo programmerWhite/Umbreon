@@ -9,7 +9,7 @@
            :cows="key"
            :cols="key1"
            :key="key1">
-        {{!!item1.value?dealHtmlData(item1.value):" "}}
+        {{!!item1.value?dealHtmlData(item1.value):""}}
       </div>
       <div class="table-line-operation" v-show="tableConfig.editStatus">
         <span @click="addLine(key)">+</span>
@@ -91,7 +91,7 @@
         },
         /*div 输入框 失去焦点的时候 给他 数据做一个保存*/
         blurDivInput:function (e) {
-          var text = e.target.innerText;
+          var text = e.target.innerText.trim();
           var rows = e.target.getAttribute('cows');
           var cols = e.target.getAttribute('cols');
 
@@ -111,7 +111,7 @@
           sessionStorage.setItem('tempProjectData',JSON.stringify(this.tempProjectData));
           this.$emit('dataChange',this.tempProjectData);
 
-          e.target.innerText = this.dealHtmlData(text);
+          e.target.innerText = this.dealHtmlData(text).toString();
         },
 
         sortLineStyle:function (value,index) {
@@ -137,9 +137,9 @@
             value = value.toFixed(2);
             value = parseFloat(value);
             value = value.toLocaleString();
-            return value;//返回的是字符串23,245.12保留2位小数
+            return value.replace(/<br>/g,"");//返回的是字符串23,245.12保留2位小数
           }else{
-            return value;
+            return value.replace(/<br>/g,"");
           }
         },
       }

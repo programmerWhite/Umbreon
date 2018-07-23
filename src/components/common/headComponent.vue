@@ -141,4 +141,7 @@
     flex-wrap: nowrap;
     align-items: center;
   }
+  .log-div img{
+    width: 310px;
+  }
 </style>

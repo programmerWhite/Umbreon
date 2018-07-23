@@ -373,7 +373,7 @@
   .input-line-div{
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 10px;
   }
   .input-label{
     text-align: right;
@@ -387,7 +387,7 @@
     border-radius: 6px;
   }
   .text-area-style{
-    height: 120px;
+    height: 70px;
     width: 100%;
     resize: none;
     padding: 10px;
