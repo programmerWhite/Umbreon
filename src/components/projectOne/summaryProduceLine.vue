@@ -2,7 +2,12 @@
   <div class="table-container-div">
     <div class="cols-line-div" v-for="(item,key) in tableArray" :key="key">
       <div class="rows-outer-div" v-for="(item1,key1) in item"  :key1="key1">
-        <div class="rows-one-div" v-if="!item1.childData"  :style="{backgroundColor:item1.bgColor,color:item1.color}" v-html="item1.value"></div>
+        <div class="rows-one-div"
+             v-if="!item1.childData"
+             :style="{backgroundColor:item1.bgColor,color:item1.color}"
+             v-html="item1.value"
+             :class="sortLineStyle(item1.value,key)"
+        ></div>
         <div class="rows-container-div"
              v-if="item1.childData"
              v-for="(item2,key2) in item1.childData"
@@ -23,8 +28,8 @@
       },
       methods:{
         dealHtmlData:function (value) {
-          var reg = RegExp("^[0-9]{1,}.?[0-9]{0,}$");
-          if(!!reg.test(value)){
+          var reg = /^\d+(\.\d+)?$/;
+          if(!!reg.exec(value)){
             value = parseFloat(value);
             value = value.toFixed(2);
             value = parseFloat(value);
@@ -35,6 +40,7 @@
           }
         },
         sortLineStyle:function (value,index) {
+          console.log(index)
           // return false;
           if(index == 0) {
             if (value != "" && value.indexOf('.') != -1) {
@@ -89,14 +95,14 @@
   }
   .text-left{
     justify-content: flex-start;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
   }
   .text-right{
     justify-content: flex-end;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
   }
 </style>

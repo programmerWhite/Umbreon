@@ -131,15 +131,15 @@
           }
         },
         dealHtmlData:function (value) {
-          var reg = RegExp("^[0-9]{1,}.?[0-9]{0,}$");
-          if(!!reg.test(value)){
+          var reg = /^\d+(\.\d+)?$/;
+          if(!!reg.exec(value)){
             value = parseFloat(value);
             value = value.toFixed(2);
             value = parseFloat(value);
             value = value.toLocaleString();
-            return value.replace(/<br>/g,"");//返回的是字符串23,245.12保留2位小数
+            return value;//返回的是字符串23,245.12保留2位小数
           }else{
-            return value.replace(/<br>/g,"");
+            return value;
           }
         },
       }
@@ -197,14 +197,14 @@
   }
   .text-left{
     justify-content: flex-start;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
   }
   .text-right{
     justify-content: flex-end;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
   }
 </style>

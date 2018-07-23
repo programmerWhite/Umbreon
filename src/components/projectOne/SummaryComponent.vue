@@ -82,8 +82,8 @@
             let tempArray = [
               {
                 value:data[i].segmentName,
-                bgColor:"#333333",
-                color:"white"
+                bgColor:"white",
+                color:"#333333"
               },
               {
                 childData:[

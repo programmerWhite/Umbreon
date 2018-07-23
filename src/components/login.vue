@@ -74,4 +74,7 @@
     right: 0px;
     top: 100px;
   }
+  .log-div img{
+    width: 310px;
+  }
 </style>

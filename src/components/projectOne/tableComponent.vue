@@ -96,8 +96,8 @@
         this.$emit("dataChange",this.tempProjectData);
       },
       dealHtmlData:function (value) {
-        var reg = RegExp("^[0-9]{1,}.?[0-9]{0,}$");
-        if(!!reg.test(value)){
+        var reg = /^\d+(\.\d+)?$/;
+        if(!!reg.exec(value)){
           value = parseFloat(value);
           value = value.toFixed(2);
           value = parseFloat(value);
