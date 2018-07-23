@@ -527,7 +527,7 @@
 
   .pro-base-table{
     font-size: 20px;
-    line-height: 40px;
+    line-height: 30px;
     margin-top: 20px;
   }
   .font-size-16{

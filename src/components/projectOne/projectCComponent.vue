@@ -287,7 +287,7 @@
   .table-cell-div,
   .table-line-operation{
     width: 100%;
-    min-height: 40px;
+    min-height: 30px;
     text-align: center;
     border-right: 1px solid #dedfe2;
     background-color: #e3e3e3;

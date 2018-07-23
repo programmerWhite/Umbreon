@@ -141,14 +141,14 @@
       dealMenuData:function (segmentList,dList) {
         /*添加一个默认数据*/
         var tempSegment = [{
-          menuName:"C.0汇总",
+          menuName:"C.0 汇总",
           type:"seg",
           id:-1
         }];
         /*整理 segmentList 数据*/
         for(var i=0;i<segmentList.length;i++){
           tempSegment.push({
-            menuName:segmentList[i].code+""+segmentList[i].title,
+            menuName:segmentList[i].code+" "+segmentList[i].title,
             type:"seg",
             id:segmentList[i].projectSS_id
           });
@@ -158,7 +158,7 @@
         var tempDList = [];
         for(var i=0;i<dList.length;i++){
           tempDList.push({
-            menuName:dList[i].code+""+dList[i].title,
+            menuName:dList[i].code+" "+dList[i].title,
             type:"d",
             id:dList[i].id
           });
@@ -166,26 +166,26 @@
 
         this.menuData = [
             {
-              menuName:"商办项目调研报告",
+              menuName:"A 商办项目调研报告",
               type:"staticMenu",
               id:-1,
               menuChild:[],
             },
             {
-              menuName:"项目基本信息",
+              menuName:"B 项目基本信息",
               type:"staticMenu",
               id:2,
               menuChild:[],
             },
             {
-              menuName:"分部分项造价比较表",
+              menuName:"C 分部分项造价比较表",
               childShow:true,
               type:"staticMenu",
               id:-1,
               menuChild:tempSegment,
             },
             {
-              menuName:"各专业指标及比较分析表",
+              menuName:"D 各专业指标及比较分析表",
               childShow:true,
               type:"staticMenu",
               id:-1,

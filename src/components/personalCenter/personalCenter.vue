@@ -273,7 +273,7 @@
   }
   .edit-photo{
     width: 440px;
-    min-height: 40px;
+    min-height: 30px;
   }
   .input-style{
     width: 440px;

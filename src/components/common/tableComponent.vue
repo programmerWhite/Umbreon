@@ -197,13 +197,14 @@
   }
   .text-left{
     justify-content: flex-start;
-    padding:0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     box-sizing: border-box;
-    font-size: 16px;
   }
   .text-right{
     justify-content: flex-end;
-    padding:0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     box-sizing: border-box;
   }
 </style>
