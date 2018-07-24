@@ -7,7 +7,9 @@
            @blur="blurDivInput"
            :cows="key"
            :cols="key1"
+           :style="dealStyles(item1)"
            :key="key1"
+           v-if="item1.name != 'id'"
            :dataType="item1.type">{{dealHtmlData(item1.value)}}</div>
     </div>
   </div>
@@ -107,6 +109,14 @@
           return value;
         }
       },
+      dealStyles:function (data) {
+        if(data.styles){
+          if(data.styles.xie){
+            return "font-style: italic;";
+          }
+        }
+        return "";
+      }
     }
   }
 </script>

@@ -4,7 +4,7 @@
       <div class="project-h2">{{menuName}}</div>
       <div class="table-container-div">
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData"></table-component>
-        <div class="pro-button-line-div" v-if="roleId==3">
+        <div class="pro-button-line-div" v-if="roleId==3 && projectType">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
           <button class="desc-button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>
@@ -38,6 +38,17 @@
       roleId: function () {
         return this.userInfo.roleId;
       },
+      projectType:function () {
+
+        var projectType = sessionStorage.getItem('currentProjectType');
+        if(projectType == 1){
+          return true;
+        }else if(projectType == 2){
+          return false;
+        }
+
+      }
+
     },
     beforeMount:function () {
       this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));

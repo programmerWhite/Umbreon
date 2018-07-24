@@ -13,10 +13,10 @@
                 <router-link to="/addNewProject">新增项目</router-link>
               </li>
               <li v-if="roleId != 1">
-                <router-link to="/allProject">现有项目</router-link>
+                <router-link to="/allProject/1">现有项目</router-link>
               </li>
               <li v-if="roleId != 1">
-                <router-link to="/allProject">项目成本分析</router-link>
+                <router-link to="/allProject/2">项目成本分析</router-link>
               </li>
               <li v-if="userName && userRole">
                 <div class="flex-style">

@@ -1,11 +1,12 @@
 <template>
   <div class="table-container-div">
-    <div class="table-line-div" v-for="(item,key) in tempProjectData" :key="key">
+    <div class="table-line-div" v-for="(item,key) in tempProjectData" v-if="!item.columns[0].style"  :key="key">
       <div class="table-cell-div"
            v-for="(item1,key1) in item.columns"
            :contenteditable="tableConfig.editStatus"
            @blur="blurDivInput"
            :class="sortLineStyle(item1.value,key1)"
+           :style="getCellStyle(tempProjectData[0].columns[key1])"
            :cows="key"
            :cols="key1"
            :key="key1">
@@ -55,9 +56,10 @@
         /*添加一行*/
         addLine:function (index) {
           index++;
-          var tempLine = this.cloneData(this.tempProjectData[0].columns);
+          var tempLine = this.cloneData(this.tempProjectData[1].columns);
+          console.log(tempLine)
           for(var key in tempLine){
-            tempLine[key] = "";
+            tempLine[key].value = "";
           }
           this.tempProjectData.splice(index,0,{
             "columns":tempLine
@@ -142,6 +144,21 @@
             return value;
           }
         },
+        getCellStyle:function (data) {
+          if(!!data.style){
+            var tempData = data.style;
+            var styleString = "";
+            if(tempData.width){
+              styleString += "width:"+tempData.width+"px;";
+            }
+            if(tempData.textAlign){
+              styleString += "justify-content:"+tempData.textAlign+";";
+            }
+            return styleString;
+          }else{
+            return "";
+          }
+        }
       }
     }
 </script>

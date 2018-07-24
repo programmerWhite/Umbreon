@@ -73,7 +73,7 @@ var routerObj = new Router({
         component: userManage
       },
       {
-        path: '/allProject',
+        path: '/allProject/:type',
         name: 'allProject',
         component: allProject
       },

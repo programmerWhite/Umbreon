@@ -11,7 +11,7 @@
             </div>
           </div>
         </router-link>
-        <router-link to="/allProject">
+        <router-link to="/allProject/1">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">
@@ -20,7 +20,7 @@
             </div>
           </div>
         </router-link>
-        <router-link to="/allProject">
+        <router-link to="/allProject/2">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/33.png"/>
             <div class="project-text">

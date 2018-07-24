@@ -39,7 +39,7 @@
         clickMenu:function (type,id,menuName) {
           this.currentMenuId  = type+"-"+id;
           this.$emit("menuClick",type,id,menuName);
-          if(type == "staticMenu" && id == -1){
+          if(type == "staticMenu" && id < 0){
             return false;
           }
           this.menuShowHide = false;

@@ -40,8 +40,6 @@
           }
         },
         sortLineStyle:function (value,index) {
-          console.log(index)
-          // return false;
           if(index == 0) {
             if (value != "" && value.indexOf('.') != -1) {
               return "text-right";

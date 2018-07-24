@@ -28,7 +28,7 @@
           <!--<button class="desc-button-style" v-show="projectEditSwitch">确认</button>-->
           <!--</div>-->
         </div>
-        <div class="pro-button-line-div" v-if="roleId==3">
+        <div class="pro-button-line-div" v-if="roleId==3 && projectType">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
           <button class="desc-button-style" v-show="projectTableEditSwitch" @click="saveProjectData">确认</button>
@@ -91,6 +91,17 @@
         roleId: function () {
           return this.userInfo.roleId;
         },
+        projectType:function () {
+
+          var projectType = sessionStorage.getItem('currentProjectType');
+          console.log(projectType)
+          if(projectType == 1){
+            return true;
+          }else if(projectType == 2){
+            return false;
+          }
+
+        }
       },
       beforeMount:function () {
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));

@@ -13,7 +13,7 @@
       <div class="table-line-div">
         <div class="table-cell-div" v-for="(item1,key1) in lastLine"  :key="key1">{{dealHtmlData(item1.value)}}</div>
       </div>
-      <div class="pro-button-line-div" v-if="roleId==3">
+      <div class="pro-button-line-div" v-if="roleId==3 && projectType">
         <button class="button-style" @click="editProTable('true')" v-show="!projectTableEditSwitch">编辑</button>
         <button class="button-style" @click="editProTable('false')" v-show="projectTableEditSwitch">取消</button>
         <button class="button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>
@@ -43,6 +43,16 @@
         roleId: function () {
           return this.userInfo.roleId;
         },
+        projectType:function () {
+
+          var projectType = sessionStorage.getItem('currentProjectType');
+          if(projectType == 1){
+            return true;
+          }else if(projectType == 2){
+            return false;
+          }
+
+        }
       },
       beforeMount:function () {
         this.userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
@@ -54,13 +64,13 @@
 
         },
         saveTableData:function () {
-          if(this.componentId == 1){
+          // if(this.componentId == 1){
             var tempData = this.currentTableData;
 
             /*从数据里面抽取出 需要的数据 进行组装*/
             var segmentWorkString = "";
             for(var i=1;i<tempData.length;i++){
-              segmentWorkString += tempData[i][0].value+"@"+tempData[i][2].value+"#";
+              segmentWorkString += tempData[i][0].value+"@"+tempData[i][3].value+"#";
             }
             segmentWorkString = segmentWorkString.substring(0,segmentWorkString.lastIndexOf("#"));
 
@@ -86,7 +96,7 @@
                 });
               }
             });
-          }
+          // }
 
         },
         editProTable:function (type) {
@@ -113,15 +123,17 @@
 
           this.currentTableData = tempProjectData;
 
-          var allPrice = 0;
-          for(var i=1;i<tempProjectData.length;i++){
-            for(var j=0;j<tempProjectData[i].length;j++){
-              var tempData = tempProjectData[i][j];
-              if(j == 2){
-                allPrice += parseFloat(tempData.value,2)
-              }
-            }
-          }
+          // var allPrice = tempProjectData.all_totalPrice;
+
+          // for(var i=1;i<tempProjectData.length;i++){
+          //   for(var j=0;j<tempProjectData[i].length;j++){
+          //     var tempData = tempProjectData[i][j];
+          //     if(j == 2){
+          //       allPrice += parseFloat(tempData.value,2)
+          //     }
+          //   }
+          // }
+
           this.lastLine = [
             {
               edit:false,
@@ -131,7 +143,7 @@
               value:"小计"
             },{
               edit:false,
-              value:allPrice.toFixed(2)
+              value:this.baseData.totalRow.all_totalPrice
             },{
               edit:false,
               value:this.baseData.totalRow.all_totalPrice
@@ -176,10 +188,19 @@
                   type:"string"
                 },
                 {
+                  name:"sort",
+                  edit:false,
+                  value:tempData[i].workCode,
+                  type:"string"
+                },
+                {
                   name:"title",
                   edit:false,
                   value:tempData[i].title,
-                  type:"string"
+                  type:"string",
+                  styles:{
+                    xie:!!tempData[i].parentId?true:false
+                  }
                 },
                 {
                   name:"perSquarePrice",

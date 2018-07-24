@@ -184,14 +184,14 @@
               menuName:"C 分部分项造价比较表",
               childShow:true,
               type:"staticMenu",
-              id:-1,
+              id:-2,
               menuChild:tempSegment,
             },
             {
               menuName:"D 各专业指标及比较分析表",
               childShow:true,
               type:"staticMenu",
-              id:-1,
+              id:-3,
               menuChild:tempDList,
             }
           ];

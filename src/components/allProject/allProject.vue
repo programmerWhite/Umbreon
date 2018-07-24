@@ -12,7 +12,7 @@
             <!--</div>-->
           <!--</div>-->
           <div class="pro-one-container-div">
-              <project-one v-for="(item,key) in allProjectData.projectsMsg" :projectData="item" :key="key"></project-one>
+              <project-one v-for="(item,key) in allProjectData.projectsMsg" :projectType="projectType" :projectData="item" :key="key"></project-one>
           </div>
         </div>
       </div>
@@ -36,11 +36,30 @@
     beforeMount:function () {
       this.getAllProject();
     },
+    computed:{
+      projectType:function () {
+        return this.$route.params.type;
+      }
+    },
+    watch:{
+        '$route':function (to,from) {
+          this.getAllProject();
+        }
+    },
     methods:{
       getAllProject:function () {
         var This = this;
+
+        var url = this.$store.state.other.ipAddress + "/manages/manageprojects!queryProjectsByConditionsEdit.action";
+
+        if(this.$route.params.type == 1){
+          url = this.$store.state.other.ipAddress + "/manages/manageprojects!queryProjectsByConditionsEdit.action";
+        }else if(this.$route.params.type == 2){
+          url = this.$store.state.other.ipAddress + "/manages/manageprojects!queryProjectsByConditionsView.action";
+        }
+
         this.axios({
-          url: this.$store.state.other.ipAddress + "/manages/manageprojects!queryProjectsByConditionsEdit.action",
+          url: url,
           method: "POST",
           params: {
             "userId": JSON.parse(sessionStorage.getItem("userInfo")).id,

@@ -427,7 +427,6 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    padding-bottom: 10px;
   }
   .button-style{
     background-color:#ed6b1a;

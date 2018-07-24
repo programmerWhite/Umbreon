@@ -51,7 +51,7 @@
 <script>
     export default {
         name: "project-one",
-      props:["projectData"],
+      props:["projectData","projectType"],
       data(){
           return {
             errorImg:require('../../assets/project/projectImgError.png')
@@ -65,6 +65,9 @@
       },
       methods:{
           goToProjectOne:function (projectId,projectS_id) {
+
+            sessionStorage.setItem('currentProjectType',this.projectType);
+
             this.$router.push({
               name:"projectOne",
               params:{
