@@ -4,7 +4,7 @@
       <img class="scroll-img" :src="scrollImgArray[currentIndex]" />
     </div>
     <div class="no-project-img" v-else>
-      <span>暂时还没有项目图片,请添加。</span>
+      <img src="../../assets/project/defaultProjectImg.png" />
     </div>
     <div class="index-circle-div">
       <div class="circle-div" v-for="(item,key) in scrollImgArray" @click="changePictureIndex(key)" :class="key == currentIndex?'current-circle':''">{{key+1}}</div>

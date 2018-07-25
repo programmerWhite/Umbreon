@@ -109,8 +109,7 @@
 
         /*根据#关键字做拆分*/
         if( this.baseData.photoes == ""){
-          var img = require("../../assets/project/defaultProjectImg.png");
-          var imgTemp = [img];
+          var imgTemp = [];
         }else{
           var imgTemp = this.baseData.photoes.split('#');
         }
