@@ -83,6 +83,7 @@
   }
   .current-menu-style{
     background-color: #ed6b1a;
+    color: white;
   }
   .menu-content-div{
     box-shadow: 0 2px 10px 2px #cccccc;

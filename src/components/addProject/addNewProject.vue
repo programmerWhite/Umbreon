@@ -7,16 +7,15 @@
 
         <div class="flex-style">
           <div class="input-line-div">
-            <div class="input-label">项目名称：</div>
-            <div class="input-outer-div">
-              <input type="text" class="input-style" v-model="projectTitle"/>
-            </div>
-          </div>
-
-          <div class="input-line-div">
             <div class="input-label">城市：</div>
             <div class="input-outer-div">
               <input type="text" class="input-style" v-model="cityName"/>
+            </div>
+          </div>
+          <div class="input-line-div">
+            <div class="input-label">项目名称：</div>
+            <div class="input-outer-div">
+              <input type="text" class="input-style" v-model="projectTitle"/>
             </div>
           </div>
           <div class="input-line-div flex-start" style="align-items: center">

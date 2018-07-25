@@ -73,6 +73,7 @@
     height: 60px;
     width: 100%;
     border-bottom: 1px solid #cccccc;
+    background-color: white;
   }
   .nav-inner-div{
     width: 1200px;

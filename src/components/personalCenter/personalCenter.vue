@@ -1,52 +1,54 @@
 <template>
-  <div class="home-page-div">
-    <head-component></head-component>
-    <div class="per-c-div">
-      <div class="per-c-head-div">
-        <span class="head-label">个人信息</span>
-      </div>
-      <div class="line-div">
-        <div class="line-label-div">头像</div>
-        <div class="edit-photo">
-          <img class="user-photo" @click="addImgToFile" :src="userPhoto" :onerror="defaultPhoto" />
+  <div class="bg-color">
+    <div class="home-page-div">
+      <head-component></head-component>
+      <div class="per-c-div">
+        <!--<div class="per-c-head-div">-->
+          <!--<span class="head-label">个人信息</span>-->
+        <!--</div>-->
+        <div class="line-div">
+          <div class="line-label-div">头像</div>
+          <div class="edit-photo">
+            <img class="user-photo" @click="addImgToFile" :src="userPhoto" :onerror="defaultPhoto" />
+          </div>
+        </div>
+        <div class="line-div">
+          <div class="line-label-div">用户名:</div>
+          <div class="input-outer-div">
+            <input type="text" class="input-style" v-model="userName" disabled="disabled"/>
+          </div>
+        </div>
+        <div class="line-div">
+          <div class="line-label-div">姓名:</div>
+          <div class="input-outer-div">
+            <input type="text" class="input-style" v-model="nameText"/>
+          </div>
+        </div>
+        <div class="line-div">
+          <div class="line-label-div">登录密码:</div>
+          <div class="input-outer-div">
+            <input type="password" class="input-style" v-model="oldPassword"/>
+          </div>
+        </div>
+        <div class="line-div">
+          <div class="line-label-div">新密码:</div>
+          <div class="input-outer-div">
+            <input type="password" class="input-style" v-model="newPassword"/>
+          </div>
+        </div>
+        <div class="line-div">
+          <div class="line-label-div">确认密码:</div>
+          <div class="input-outer-div">
+            <input type="password" class="input-style" v-model="confirmPassword"/>
+          </div>
+        </div>
+        <div class="button-line-div">
+          <button class="button-style" @click="goBack">取消</button>
+          <button class="button-style" @click="saveUserInfo">确认</button>
         </div>
       </div>
-      <div class="line-div">
-        <div class="line-label-div">用户名:</div>
-        <div class="input-outer-div">
-          <input type="text" class="input-style" v-model="userName" disabled="disabled"/>
-        </div>
-      </div>
-      <div class="line-div">
-        <div class="line-label-div">姓名:</div>
-        <div class="input-outer-div">
-          <input type="text" class="input-style" v-model="nameText"/>
-        </div>
-      </div>
-      <div class="line-div">
-        <div class="line-label-div">登录密码:</div>
-        <div class="input-outer-div">
-          <input type="password" class="input-style" v-model="oldPassword"/>
-        </div>
-      </div>
-      <div class="line-div">
-        <div class="line-label-div">新密码:</div>
-        <div class="input-outer-div">
-          <input type="password" class="input-style" v-model="newPassword"/>
-        </div>
-      </div>
-      <div class="line-div">
-        <div class="line-label-div">确认密码:</div>
-        <div class="input-outer-div">
-          <input type="password" class="input-style" v-model="confirmPassword"/>
-        </div>
-      </div>
-      <div class="button-line-div">
-        <button class="button-style" @click="goBack">取消</button>
-        <button class="button-style" @click="saveUserInfo">确认</button>
-      </div>
+      <input class="add-img" ref="addImgInput" type="file" @change="uploadProjectImg" />
     </div>
-    <input class="add-img" ref="addImgInput" type="file" @change="uploadProjectImg" />
   </div>
 </template>
 
@@ -258,7 +260,7 @@
     width: 1200px;
     height: 880px;
     margin: 20px auto;
-    background-color:#eeeeee ;
+    background-color:white ;
     padding: 20px;
     box-sizing: border-box;
   }
@@ -322,5 +324,13 @@
   }
   .button-style:last-child{
     margin-left: 20px;
+  }
+  .bg-color{
+    position: fixed;
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%;
+    left: 0px ;
+    top: 0px;
   }
 </style>
