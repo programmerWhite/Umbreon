@@ -1,10 +1,12 @@
 <template>
   <div class="table-container-div">
     <div class="cols-line-div" v-for="(item,key) in tableArray" :key="key">
-      <div class="rows-outer-div" v-for="(item1,key1) in item"  :key1="key1">
+      <div class="rows-outer-div"
+           v-for="(item1,key1) in item"
+           :key1="key1">
         <div class="rows-one-div"
              v-if="!item1.childData"
-             :style="{backgroundColor:item1.bgColor,color:item1.color}"
+             :style="{backgroundColor:item1.bgColor,color:item1.color,fontStyle:item1.fontStyle}"
              v-html="item1.value"
              :class="sortLineStyle(item1.value,key)"
         ></div>

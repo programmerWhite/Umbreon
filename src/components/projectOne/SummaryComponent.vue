@@ -48,11 +48,19 @@
             ]
             for(var j=0;j<data[i].column.length;j++){
               let tempData = data[i].column[j];
-              tempArray.push({
-                value:tempData,
-                bgColor:"white",
-                color:"#333333"
-              })
+              if(j == data[i].column.length - 1) {
+                tempArray.push({
+                  value: tempData,
+                  bgColor: "#e3e3e3",
+                  color: "#333333"
+                })
+              }else{
+                tempArray.push({
+                  value: tempData,
+                  bgColor: "white",
+                  color: "#333333"
+                })
+              }
             }
             this.tableArray.push(tempArray);
           }else if( i == 1 ){
@@ -70,11 +78,21 @@
             ]
             for(var j=0;j<data[i].column.length;j++){
               let tempData = data[i].column[j];
-              tempArray.push({
-                value:tempData,
-                bgColor:"white",
-                color:"#333333"
-              })
+              if(j == data[i].column.length - 1){
+                tempArray.push({
+                  value:tempData[0],
+                  bgColor:"#e3e3e3",
+                  color:"#333333"
+                })
+              }else{
+                tempArray.push({
+                  value:tempData[0],
+                  bgColor:"white",
+                  color:"#333333",
+                  fontStyle:tempData[1]==1?"italic":""
+                })
+              }
+
             }
             this.tableArray.push(tempArray);
           }else if(i == data.length-1){
@@ -92,11 +110,19 @@
             ]
             for(var j=0;j<data[i].column.length;j++){
               let tempData = data[i].column[j];
-              tempArray.push({
-                value:tempData,
-                bgColor:"white",
-                color:"#333333"
-              })
+              if(j == data[i].column.length - 1) {
+                tempArray.push({
+                  value: tempData,
+                  bgColor: "#e3e3e3",
+                  color: "#333333"
+                })
+              }else{
+                tempArray.push({
+                  value: tempData,
+                  bgColor: "white",
+                  color: "#333333"
+                })
+              }
             }
             this.tableArray.push(tempArray);
           }
@@ -125,19 +151,36 @@
             for(var j=0;j<data[i].perSquarePriceStr.length;j++){
               let tempData1 = data[i].perSquarePriceStr[j];
               let tempData2 = data[i].totalPriceStr[j];
-              tempArray.push({
-                childData:[
-                  {
-                    value:tempData1,
-                    bgColor:"white",
-                    color:"#333333"
-                  },{
-                    value:tempData2,
-                    bgColor:"white",
-                    color:"#333333"
-                  }
-                ]
-              });
+
+              if(j == data[i].perSquarePriceStr.length - 1) {
+                tempArray.push({
+                  childData: [
+                    {
+                      value: tempData1,
+                      bgColor: "#e3e3e3",
+                      color: "#333333"
+                    }, {
+                      value: tempData2,
+                      bgColor: "#e3e3e3",
+                      color: "#333333"
+                    }
+                  ]
+                });
+              }else{
+                tempArray.push({
+                  childData: [
+                    {
+                      value: tempData1,
+                      bgColor: "white",
+                      color: "#333333"
+                    }, {
+                      value: tempData2,
+                      bgColor: "white",
+                      color: "#333333"
+                    }
+                  ]
+                });
+              }
             }
             this.tableArray.push(tempArray);
           }

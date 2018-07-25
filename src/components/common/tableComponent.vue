@@ -65,11 +65,13 @@
             "columns":tempLine
           });
           sessionStorage.setItem('tempProjectData',JSON.stringify(this.tempProjectData));
+          this.$emit('dataChange',this.tempProjectData);
         },
         /*删除一行数据*/
         deleteLine:function (index) {
           this.tempProjectData.splice(index,1);
           sessionStorage.setItem('tempProjectData',JSON.stringify(this.tempProjectData));
+          this.$emit('dataChange',this.tempProjectData);
         },
         /*深复制方法*/
         cloneData:function (obj) {
