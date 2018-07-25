@@ -42,7 +42,7 @@
         </div>
         <div class="input-line-div">
           <div class="add-photo-container-div">
-            <p v-if="imgArray.length == 0">添加项目介绍图片</p>
+            <p v-if="imgArray.length == 0">添加项目介绍图片(940px x 290px)</p>
             <div v-else class="img-container-div">
               <div class="img-photo-one" v-for="(item,key) in imgArray" :key="key">
                 <img class="upload-img" :src="item" />
