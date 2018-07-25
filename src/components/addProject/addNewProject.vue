@@ -80,16 +80,16 @@
     data(){
       return{
         dataZone:[],//项目区域  数据
-        projectTitle:"",
-        cityName:"",
-        projectDesc:"",
+        projectTitle:"",//项目名称
+        cityName:"",//项目城市
+        projectDesc:"",//项目描述
         stageString:"",
         recordsCode:"",
         imgArray: [],
         imgData: {
           accept: 'image/gif, image/jpeg, image/png, image/jpg',
         },
-        tableConfig:{
+        tableConfig:{//给table 组件使用的数据
           projectTableData:[],/*生成项目表格数据*/
           sessionSwitch:true,
           openEdit:true,
@@ -98,9 +98,11 @@
       }
     },
     created:function () {
+      //created 钩子里面 获取数据
       this.getInitProjectData();
     },
     methods:{
+      //修改 点击城市 是否 选择按钮 显示隐藏，同时修改 对应数据
       changeNewVisible:function (e) {
         var index = e.target.getAttribute("index");
         this.$set(this.dataZone,index,{
@@ -123,6 +125,7 @@
             This.tableConfig.projectTableData = JSON.parse(data.commonB0);
         });
       },
+      //子组件 的emit 事件函数
       changeData:function (data) {
         this.tableConfig.projectTableData = data;
       },
@@ -191,17 +194,17 @@
           return false;
         }
 
-        if(this.imgArray.length == 0){
-          this.$store.dispatch("dialogParameter", {
-            type: "alert",
-            changeText: "请添加项目图片。",
-            button1: "确认",
-            button1CallBack:function () {
-
-            },
-          });
-          return false;
-        }
+        // if(this.imgArray.length == 0){
+        //   this.$store.dispatch("dialogParameter", {
+        //     type: "alert",
+        //     changeText: "请添加项目图片。",
+        //     button1: "确认",
+        //     button1CallBack:function () {
+        //
+        //     },
+        //   });
+        //   return false;
+        // }
 
         var postData = {
           "title":title,
@@ -231,7 +234,7 @@
               changeText: "项目创建成功，前去项目查看页面。",
               button1: "确认",
               button1CallBack:function () {
-
+                  //项目创建成功跳转到 查看项目页面
                   This.$router.push({
                     name:"projectOne",
                     params:{
@@ -245,7 +248,7 @@
         });
 
       },
-
+/*前往 所有项目 的页面*/
       backToProjectAll:function () {
         this.$router.push({
           name:"allProject"

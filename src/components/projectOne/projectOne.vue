@@ -17,6 +17,7 @@
         <project-c-component :baseData="cTypeData" :menuName="menuName" @reloadPage="reloadPage" :componentId="componentId" v-if="!!cTypeData && componentType=='seg' && componentId != '-1'"></project-c-component>
         <summary-component :baseData="summaryData" :menuName="menuName" v-if="summaryData && componentType=='seg' && componentId == '-1'"></summary-component>
         <project-d-component :baseData="dTypeData" :menuName="menuName" @reloadPage="reloadPage" v-if="!!dTypeData && componentType=='d'"></project-d-component>
+        <base-project-temp :menuName="menuName" v-if="componentType=='staticMenu'&& componentId == -1"></base-project-temp>
       </section>
     </div>
   </div>
@@ -30,10 +31,20 @@
   import SummaryComponent from "@/components/projectOne/SummaryComponent"
   import projectDComponent from "@/components/projectOne/projectDComponent"
   import changeProjectStatus from "@/components/projectOne/changeProjectStatus"
+  import baseProjectTemp from "@/components/projectOne/baseProjectTemp"
 
   export default {
       name: "project-one",
-      components:{headComponent,slideMenuComponent,baseProject,projectCComponent,SummaryComponent,projectDComponent,changeProjectStatus},
+      components:{
+        headComponent,
+        slideMenuComponent,
+        baseProject,
+        projectCComponent,
+        SummaryComponent,
+        projectDComponent,
+        changeProjectStatus,
+        baseProjectTemp
+      },
     data(){
         return{
           menuData:{},
@@ -58,7 +69,7 @@
         },
       /*菜单组件调用 父组件的方法*/
       menuClick:function (type,id,menuName) {
-        if(type == "staticMenu" && id == -1){
+        if(type == "staticMenu" && id == -2 || id == -3){
           return false;
         }
 
@@ -233,7 +244,7 @@
       rejectData:function (projectS_id) {
         var This = this;
         this.axios({
-          url: this.$store.state.other.ipAddress + "/manages/manageprojects!updateProjectStageStatus_Done.action",
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!updateProjectStageStatus_Rejected.action",
           method:"post",
           params:{
             projectS_id:projectS_id
@@ -252,11 +263,11 @@
           }
         });
       },
-      //驳回 接口调用
+      //同意 接口调用
       agreeData:function (projectS_id) {
         var This = this;
         this.axios({
-          url: this.$store.state.other.ipAddress + "/manages/manageprojects!updateProjectStageStatus_Rejected.action",
+          url: this.$store.state.other.ipAddress + "/manages/manageprojects!updateProjectStageStatus_Pass.action",
           method:"post",
           params:{
             projectS_id:projectS_id

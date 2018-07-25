@@ -99,7 +99,7 @@
   .pro-name-div{
     font-size: 16px;
     color: #333333;
-    padding: 10px 20px;
+    padding: 10px 10px;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -120,6 +120,9 @@
   .color-orange{
     color: #ed6b1a;
     font-size: 14px;
+    display: inline-block;
+    width: 60px;
+    text-align: right;
   }
   .arrow-img {
     float: right;

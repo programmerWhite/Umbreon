@@ -37,7 +37,9 @@
           childShow = childShow?false:true;
         },
         clickMenu:function (type,id,menuName) {
-          this.currentMenuId  = type+"-"+id;
+          if(id != -2 && id != -3){
+            this.currentMenuId  = type+"-"+id;
+          }
           this.$emit("menuClick",type,id,menuName);
           if(type == "staticMenu" && id < 0){
             return false;
@@ -55,8 +57,6 @@
     border-top: none;
     box-sizing: border-box;
   }
-
-
   .one-level-name{
     padding-left: 20px;
     color: #ed6b1a;

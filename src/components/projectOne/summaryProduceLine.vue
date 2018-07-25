@@ -74,7 +74,7 @@
     font-size: 14px;
     min-height: 40px;
     text-align: center;
-    padding: 0 10px;
+    padding: 0 5px;
     box-sizing: border-box;
     width: 100%;
     display: flex;

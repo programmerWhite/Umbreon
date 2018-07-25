@@ -12,7 +12,7 @@
               <li v-if="roleId == 3">
                 <router-link to="/addNewProject">新增项目</router-link>
               </li>
-              <li v-if="roleId != 4 && roleId != 5">
+              <li v-if="roleId != 4 && roleId != 5 && roleId != 1">
                 <router-link to="/allProject/1">现有项目</router-link>
               </li>
               <li v-if="roleId != 1">
@@ -55,7 +55,9 @@
           }
       },
       beforeMount:function () {
+          /*session 里面获取 用户信息。方面导航内容状态的显示*/
         this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        /*如果头像为空，显示默认*/
         if(!this.userInfo.photograph){
           this.userInfo.photograph = "../../assets/common/deaulf.png";
         }

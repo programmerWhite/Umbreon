@@ -55,7 +55,7 @@
               })
             }
             this.tableArray.push(tempArray);
-          }else if( i == 1){
+          }else if( i == 1 || i == data.length-1){
             let tempArray = [
               {
                 value:"",
