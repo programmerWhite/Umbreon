@@ -238,7 +238,8 @@
                   This.$router.push({
                     name:"projectOne",
                     params:{
-                      projectId:data.projectId
+                      projectId:data.projectId,
+                      projectS_id:data.projectS_id
                     }
                   });
               },
@@ -459,7 +460,6 @@
     font-size: 18px !important;
   }
   .table-container-div{
-    width: 980px;
     margin: 0 auto;
   }
   .add-photo-container-div{

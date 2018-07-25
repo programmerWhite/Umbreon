@@ -88,6 +88,7 @@
     cursor: pointer;
     padding-bottom: 20px;
     margin-bottom: 20px;
+    margin-right: 10px;
   }
   .pro-one-div:hover{
     box-shadow: 0 0 10px 1px #cccccc;

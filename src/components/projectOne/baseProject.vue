@@ -11,7 +11,7 @@
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData.length > 0"></table-component>
 
         <div class="picture-scroll-div" >
-          <div class="change-photo-div" @click="popAddProShow=true">修改图片</div>
+          <div class="change-photo-div" @click="popAddProShow=true" v-if="projectTableEditSwitch">修改图片</div>
           <picture-scroll :scrollImgData="imgArray"></picture-scroll>
         </div>
         <div class="pro-desc-outer-div">

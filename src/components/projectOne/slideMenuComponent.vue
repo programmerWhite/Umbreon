@@ -82,7 +82,7 @@
     margin:0 10px;
   }
   .current-menu-style{
-    background-color: #fbf0e9;
+    background-color: #ed6b1a;
   }
   .menu-content-div{
     box-shadow: 0 2px 10px 2px #cccccc;

@@ -55,7 +55,7 @@
               })
             }
             this.tableArray.push(tempArray);
-          }else if( i == 1 || i == data.length-1){
+          }else if( i == 1 ){
             let tempArray = [
               {
                 value:"",
@@ -77,7 +77,30 @@
               })
             }
             this.tableArray.push(tempArray);
-          }else{
+          }else if(i == data.length-1){
+            let tempArray = [
+              {
+                value:"",
+                bgColor:"white",
+                color:"white"
+              },
+              {
+                value:"占比",
+                bgColor:"white",
+                color:"#333333"
+              }
+            ]
+            for(var j=0;j<data[i].column.length;j++){
+              let tempData = data[i].column[j];
+              tempArray.push({
+                value:tempData,
+                bgColor:"white",
+                color:"#333333"
+              })
+            }
+            this.tableArray.push(tempArray);
+          }
+          else{
 
             let tempArray = [
               {

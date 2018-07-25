@@ -63,7 +63,7 @@
   .table-container-div{
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: scroll;
+    overflow-x: auto;
   }
   .cols-line-div{
     min-width: 50px;
