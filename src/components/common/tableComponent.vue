@@ -152,7 +152,7 @@
               styleString += "width:"+tempData.width+"px;";
             }
             if(tempData.textAlign){
-              styleString += "justify-content:"+tempData.textAlign+";";
+              styleString += "justify-content:"+tempData.textAlign+";text-align:"+tempData.textAlign+";";
             }
             return styleString;
           }else{
@@ -166,9 +166,9 @@
 <style scoped>
 
   .table-container-div{
-    width: 100%;
     border: 1px solid #dedfe2;
     box-sizing: border-box;
+    display: inline-block;
   }
   .table-line-div{
     display: flex;
@@ -204,6 +204,7 @@
   }
   .table-line-operation{
     border: none;
+    width: 120px;
   }
   .table-line-operation span{
     cursor: pointer;

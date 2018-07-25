@@ -2,7 +2,7 @@
     <div class="home-page-div">
       <head-component></head-component>
       <div class="home-content-div" :class="roleId != 2?'':'two-part'">
-        <router-link to="/addNewProject" v-if="roleId != 2">
+        <router-link to="/addNewProject" v-if="roleId == 3">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/11.png"/>
             <div class="project-text">
@@ -11,7 +11,7 @@
             </div>
           </div>
         </router-link>
-        <router-link to="/allProject/1">
+        <router-link to="/allProject/1" v-if="roleId == 3 || roleId == 2">
           <div class="page-one-div">
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">

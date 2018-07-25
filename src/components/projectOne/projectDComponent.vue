@@ -2,7 +2,7 @@
   <div class="project-d-div">
     <div class="pro-d-container">
       <div class="project-h2">{{menuName}}</div>
-      <div class="table-container-div">
+      <div class="table-container-1-div">
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData"></table-component>
         <div class="pro-button-line-div" v-if="roleId==3 && projectType">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
@@ -91,7 +91,6 @@
           params:{
             projectSD_id:this.baseData.id,
             recordsCode:recordsCode,
-            recordsCode:tempData
           }
         }).then(function () {
           This.$store.dispatch("dialogParameter", {
@@ -109,6 +108,7 @@
 </script>
 
 <style scoped>
+
   .project-h2{
     margin: 10px 0;
     font-size: 18px;

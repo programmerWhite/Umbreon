@@ -9,10 +9,10 @@
               <li v-if="roleId != 1">
                 <router-link to="/home">首页</router-link>
               </li>
-              <li v-if="roleId != 1">
+              <li v-if="roleId == 3">
                 <router-link to="/addNewProject">新增项目</router-link>
               </li>
-              <li v-if="roleId != 1">
+              <li v-if="roleId != 4 && roleId != 5">
                 <router-link to="/allProject/1">现有项目</router-link>
               </li>
               <li v-if="roleId != 1">
