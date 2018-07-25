@@ -20,7 +20,7 @@
               </li>
               <li v-if="userName && userRole">
                 <div class="flex-style">
-                  <img class="user-photo-img" :src="userInfo.photograph">
+                  <img class="user-photo-img" :src="userInfo.photograph" :onerror="defaultPhoto">
                   <span>{{userName}}</span>
                   <!--.<span>{{userRole}}</span>-->
                 </div>
@@ -51,10 +51,14 @@
             userRole:"",
             roleId:"",
             userInfo:null,
+            defaultPhoto:"this.src='"+require("../../assets/common/deaulf.png")+"'"
           }
       },
       beforeMount:function () {
         this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+        if(!this.userInfo.photograph){
+          this.userInfo.photograph = "../../assets/common/deaulf.png";
+        }
         this.userName = this.userInfo.referredName;
         this.userRole = this.userInfo.name;
         this.roleId = this.userInfo.roleId;

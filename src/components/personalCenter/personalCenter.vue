@@ -68,12 +68,15 @@
         nameText:"",
         confirmPassword:"",
         userPhoto:"",
-        defaultPhoto:'this.src="' + require('../../assets/common/deaulf.png') + '"',
-        userId:null
+        defaultPhoto:'this.src="' + require('../../assets/common/defaultPhotpo.png') + '"',
+        userId:null,
+        userInfo:null
       }
     },
     beforeMount:function () {
-      var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+      this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+
+      var userInfo = this.userInfo;
       this.userPhoto = !!userInfo.photograph?userInfo.photograph:"";
       this.userName = userInfo.referredName;
       this.nameText = userInfo.realName;
@@ -168,19 +171,20 @@
 
       saveUserInfo:function () {
 
-        if(this.nameText == "" || this.nameText == " "){
-          this.$store.dispatch("dialogParameter", {
-            type: "alert",
-            changeText: "用户名不能为空。",
-            button1: "确认",
-            button1CallBack:function () {
+        // if(this.nameText == "" || this.nameText == " "){
+        //   this.$store.dispatch("dialogParameter", {
+        //     type: "alert",
+        //     changeText: "用户名不能为空。",
+        //     button1: "确认",
+        //     button1CallBack:function () {
+        //
+        //     },
+        //   });
+        //   return false;
+        // }
 
-            },
-          });
-          return false;
-        }
 
-        if(this.newPassword.length < 8 || this.newPassword.length > 20 || this.newPassword.indexOf(" ") != -1){
+        if(this.newPassword != "" && this.newPassword.length < 8 || this.newPassword.length > 20 || this.newPassword.indexOf(" ") != -1){
           this.$store.dispatch("dialogParameter", {
             type: "alert",
             changeText: "密码长度3-20位。中间不能有空格",
@@ -218,6 +222,9 @@
           var data = response.data;
           var dialogText = "";
           if(data.result == 1){
+            This.userInfo.realName = This.nameText;
+            sessionStorage.setItem("userInfo",JSON.stringify(This.userInfo));
+
             dialogText = "用户信息修改成功";
           }else if(data.result == 2){
             dialogText = "原密码输入不正确";

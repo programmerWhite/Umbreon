@@ -177,7 +177,7 @@
                 changeText: "项目图片修改成功。",
                 button1: "确认",
                 button1CallBack:function () {
-
+                  This.$router.go(0);
                 },
               });
             }

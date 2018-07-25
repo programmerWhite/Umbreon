@@ -223,7 +223,7 @@
               changeText: "已经提交成功，等待审核。",
               button1: "确认",
               button1CallBack:function () {
-
+                This.$router.go(0);
               }
             });
           }
@@ -246,7 +246,7 @@
               changeText: "项目通过审核。",
               button1: "确认",
               button1CallBack:function () {
-
+                This.$router.go(0);
               }
             });
           }
@@ -269,7 +269,7 @@
               changeText: "项目数据已经驳回。",
               button1: "确认",
               button1CallBack:function () {
-
+                This.$router.go(0);
               }
             });
           }

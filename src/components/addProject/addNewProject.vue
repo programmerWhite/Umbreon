@@ -31,7 +31,7 @@
         </div>
 
         <div class="input-line-div flex-start">
-          <div class="input-label" style="width:100px">项目描述：</div>
+          <div class="input-label" style="width:78px">项目描述：</div>
           <div class="input-outer-div" style="width: 100%">
             <textarea type="text" class="text-area-style" v-model="projectDesc"></textarea>
           </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="input-line-div">
           <div class="add-photo-container-div">
-            <p v-if="imgArray.length == 0">这里可以添加项目介绍图片</p>
+            <p v-if="imgArray.length == 0">添加项目介绍图片</p>
             <div v-else class="img-container-div">
               <div class="img-photo-one" v-for="(item,key) in imgArray" :key="key">
                 <img class="upload-img" :src="item" />
@@ -377,6 +377,7 @@
   }
   .input-label{
     text-align: right;
+    font-size: 14px;
     padding: 0 10px;
   }
   .input-style{
@@ -388,7 +389,7 @@
   }
   .text-area-style{
     height: 70px;
-    width: 100%;
+    width: 1089px;
     resize: none;
     padding: 10px;
     box-sizing: border-box;
