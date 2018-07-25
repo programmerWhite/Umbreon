@@ -131,7 +131,7 @@
       /*添加一个新项目*/
       addNewProject:function () {
         var title = this.projectTitle;
-        var photoes = this.imgArray.join("@");
+        var photoes = this.imgArray.join("#");
         var cityName = this.cityName;
         var description = this.projectDesc;
         var stageString = "";
