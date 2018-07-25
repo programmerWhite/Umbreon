@@ -135,7 +135,7 @@
         var cityName = this.cityName;
         var description = this.projectDesc;
         var stageString = "";
-        var recordsCode = sessionStorage.getItem('tempProjectData')
+        var recordsCode = JSON.stringify(this.tableConfig.projectTableData);
 
         var dataZoneArray = [];
         for(var item of this.dataZone){

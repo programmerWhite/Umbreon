@@ -6,16 +6,16 @@
         </div>
         <div class="menu-list-style">
             <ul class="level-one-ul">
-              <li v-if="roleId != 1">
+              <li v-if="roleId != 1" :class="currentMenu == 1?'current-menu-one':''" @click="clickMenu(1)">
                 <router-link to="/home">首页</router-link>
               </li>
-              <li v-if="roleId == 3">
+              <li v-if="roleId == 3" :class="currentMenu == 2?'current-menu-one':''" @click="clickMenu(2)">
                 <router-link to="/addNewProject">新增项目</router-link>
               </li>
-              <li v-if="roleId != 4 && roleId != 5 && roleId != 1">
+              <li v-if="roleId != 4 && roleId != 5 && roleId != 1" :class="currentMenu == 3?'current-menu-one':''" @click="clickMenu(3)">
                 <router-link to="/allProject/1">现有项目</router-link>
               </li>
-              <li v-if="roleId != 1">
+              <li v-if="roleId != 1" :class="currentMenu == 4?'current-menu-one':''" @click="clickMenu(4)">
                 <router-link to="/allProject/2">项目成本分析</router-link>
               </li>
               <li v-if="userName && userRole">
@@ -51,10 +51,17 @@
             userRole:"",
             roleId:"",
             userInfo:null,
-            defaultPhoto:"this.src='"+require("../../assets/common/deaulf.png")+"'"
+            defaultPhoto:"this.src='"+require("../../assets/common/deaulf.png")+"'",
+            currentMenu:1
           }
       },
       beforeMount:function () {
+        var pageNum = sessionStorage.getItem('pageNum');
+        if(pageNum){
+          this.currentMenu = pageNum;
+        }else{
+          this.currentMenu = 1;
+        }
           /*session 里面获取 用户信息。方面导航内容状态的显示*/
         this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
         /*如果头像为空，显示默认*/
@@ -64,6 +71,12 @@
         this.userName = this.userInfo.referredName;
         this.userRole = this.userInfo.name;
         this.roleId = this.userInfo.roleId;
+      },
+      methods:{
+        clickMenu:function (num) {
+          this.currentMenu = num;
+          sessionStorage.setItem('pageNum',num);
+        }
       }
     }
 </script>
@@ -105,6 +118,9 @@
   .menu-list-style li a{
     text-decoration: navajowhite;
     color: #2b3541;
+    display: block;
+    height: 100%;
+    width: 100%;
   }
   .level-two-ul{
     position: absolute;
@@ -138,8 +154,8 @@
     display: block;
   }
   .user-photo-img{
-    height: 20px;
-    width: 20px;
+    height: 35px;
+    width: 35px;
     border-radius: 100%;
     margin-right: 10px;
   }
@@ -150,5 +166,9 @@
   }
   .log-div img{
     width: 310px;
+  }
+  .current-menu-one{
+    border-bottom: 2px solid #2b3541;
+    box-sizing: border-box;
   }
 </style>
