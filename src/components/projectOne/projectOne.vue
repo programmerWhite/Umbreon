@@ -212,9 +212,9 @@
         if(type == 1){
           this.uploadData(projectS_id);
         }else if(type == 2){
-          this.rejectData(projectS_id);
-        }else if(type == 3){
           this.agreeData(projectS_id);
+        }else if(type == 3){
+          this.rejectData(projectS_id);
         }
       },
       //提交 接口调用
