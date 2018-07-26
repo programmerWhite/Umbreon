@@ -121,7 +121,9 @@
         return "";
       },
       sortLineStyle:function (value,index) {
-        if(index == 0) {
+
+        if(index == 1) {
+          console.log(value)
           if (value.indexOf('.') != -1) {
             return "text-right";
           } else {
@@ -132,7 +134,7 @@
               return "text-left";
             }
           }
-        }else if(index == 1) {
+        }else if(index == 2) {
           return "text-left";
         }
       }
