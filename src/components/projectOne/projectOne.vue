@@ -254,7 +254,7 @@
           if(data.messageType == 1){
             This.$store.dispatch("dialogParameter", {
               type: "alert",
-              changeText: "项目通过审核。",
+              changeText: "项目数据已经驳回。",
               button1: "确认",
               button1CallBack:function () {
                 This.$router.go(-1);
@@ -277,7 +277,7 @@
           if(data.messageType == 1){
             This.$store.dispatch("dialogParameter", {
               type: "alert",
-              changeText: "项目数据已经驳回。",
+              changeText: "项目通过审核。",
               button1: "确认",
               button1CallBack:function () {
                 This.$router.go(-1);
