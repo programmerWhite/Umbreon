@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import "../common/font.css"
+
   export default {
     name: "table-component",
     props:["tableConfig"],
@@ -126,6 +128,7 @@
     width: 100%;
     border: 1px solid #dedfe2;
     box-sizing: border-box;
+    font-family: DroidSansMono;
   }
   .table-line-div{
     display: flex;

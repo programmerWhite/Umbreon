@@ -21,6 +21,9 @@
 </template>
 
 <script>
+
+  import "./font.css"
+
     export default {
         name: "table-component",
       props:["tableConfig"],
@@ -174,6 +177,7 @@
     border: 1px solid #dedfe2;
     box-sizing: border-box;
     display: inline-block;
+    font-family: DroidSansMono;
   }
   .table-line-div{
     display: flex;

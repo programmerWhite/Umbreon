@@ -22,7 +22,9 @@
 </template>
 
 <script>
-    export default {
+  import "../common/font.css"
+
+  export default {
         name: "summary-produce-line",
       props:["tableArray"],
       beforeMount:function () {
@@ -66,6 +68,7 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    font-family: DroidSansMono;
   }
   .cols-line-div{
     min-width: 50px;

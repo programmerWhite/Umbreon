@@ -1,0 +1,6 @@
+@font-face {
+  font-family: "DroidSansMono";
+  src:url('../../assets/font/droidsansmono-webfont.eot') format('eot');/* IE/ */
+  src:url('../../assets/font/droidsansmono-webfont.woff') format('woff');/*non-IE*/
+  src:url('../../assets/font/DroidSansMono.ttf') format('truetype');
+}
