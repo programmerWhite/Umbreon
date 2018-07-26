@@ -18,17 +18,17 @@
               <li v-if="roleId != 1" :class="currentMenu == 4?'current-menu-one':''" @click="clickMenu(4)">
                 <router-link to="/allProject/2">项目成本分析</router-link>
               </li>
-              <li v-if="userName && userRole">
+              <li v-if="userName && userRole"  :class="currentMenu == 5?'current-menu-one':''">
                 <div class="flex-style">
                   <img class="user-photo-img" :src="userInfo.photograph" :onerror="defaultPhoto">
                   <span>{{userName}}</span>
                   <!--.<span>{{userRole}}</span>-->
                 </div>
                 <ul class="level-two-ul">
-                  <li>
+                  <li @click="clickMenu(5)">
                     <router-link to="/personalCenter">个人中心</router-link>
                   </li>
-                  <li>
+                  <li @click="clickMenu(5)">
                     <router-link to="/">退出登录</router-link>
                   </li>
                 </ul>

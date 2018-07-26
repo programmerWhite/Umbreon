@@ -38,6 +38,9 @@
           }
       },
       beforeMount:function () {
+
+        sessionStorage.removeItem('pageNum');
+
         var rememberStatus = localStorage.getItem("rememberStatus");
         this.rememberCheck = rememberStatus=="false"?false:true;
 

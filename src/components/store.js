@@ -91,7 +91,7 @@ const dialogModules = {
 
 const other = {
   state:{
-    ipAddress:"http://192.168.128.164:8087",
+    ipAddress:"http://192.168.128.38:8838",
     token:""
   },
   mutations:{
