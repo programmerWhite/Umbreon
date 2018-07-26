@@ -13,7 +13,7 @@
       <div class="table-line-div">
         <div class="table-cell-div" v-for="(item1,key1) in lastLine"  :key="key1">{{dealHtmlData(item1.value)}}</div>
       </div>
-      <div class="pro-button-line-div" v-if="roleId==3 && projectType">
+      <div class="pro-button-line-div" v-if="roleId==3 || roleId==2 && projectType">
         <button class="button-style" @click="editProTable('true')" v-show="!projectTableEditSwitch">编辑</button>
         <button class="button-style" @click="editProTable('false')" v-show="projectTableEditSwitch">取消</button>
         <button class="button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>
@@ -185,13 +185,19 @@
                   name:"id",
                   edit:false,
                   value:tempData[i].id,
-                  type:"string"
+                  type:"string",
+                  styles:{
+                    xie:!!tempData[i].parentId?true:false
+                  }
                 },
                 {
                   name:"sort",
                   edit:false,
                   value:tempData[i].workCode,
-                  type:"string"
+                  type:"string",
+                  styles:{
+                    xie:!!tempData[i].parentId?true:false
+                  }
                 },
                 {
                   name:"title",
@@ -206,19 +212,28 @@
                   name:"perSquarePrice",
                   edit:true,
                   value:tempData[i].perSquarePrice,
-                  type:"number"
+                  type:"number",
+                  styles:{
+                    xie:!!tempData[i].parentId?true:false
+                  }
                 },
                 {
                   name:"totalPrice",
                   edit:false,
                   value:tempData[i].totalPrice,
-                  type:"number"
+                  type:"number",
+                  styles:{
+                    xie:!!tempData[i].parentId?true:false
+                  }
                 },
                 {
                   name:"percentage",
                   edit:false,
                   value:tempData[i].percentage,
-                  type:"string"
+                  type:"string",
+                  styles:{
+                    xie:!!tempData[i].parentId?true:false
+                  }
                 }
               ]);
 

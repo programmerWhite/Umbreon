@@ -13,7 +13,7 @@
         <div class="rows-container-div"
              v-if="item1.childData"
              v-for="(item2,key2) in item1.childData"
-             :style="{backgroundColor:item2.bgColor,color:item2.color}"
+             :style="{backgroundColor:item2.bgColor,color:item2.color,fontStyle:item2.fontStyle}"
              :key2="key2"
              v-html="dealHtmlData(item2.value)"></div>
       </div>

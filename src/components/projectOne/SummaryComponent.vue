@@ -32,6 +32,7 @@
       },
       dealTableData:function (data) {
 
+        var bgColor = "#cccccc";
         for(var i=0;i<data.length;i++){
           if(i==0){
             let tempArray = [
@@ -50,15 +51,17 @@
               let tempData = data[i].column[j];
               if(j == data[i].column.length - 1) {
                 tempArray.push({
-                  value: tempData,
-                  bgColor: "#e3e3e3",
-                  color: "#333333"
+                  value: tempData[0],
+                  bgColor: tempData[1]==1?bgColor:"#e3e3e3",
+                  color: "#333333",
+                  fontStyle:tempData[1]==1?"italic":""
                 })
               }else{
                 tempArray.push({
-                  value: tempData,
-                  bgColor: "white",
-                  color: "#333333"
+                  value: tempData[0],
+                  bgColor: tempData[1]==1?bgColor:"white",
+                  color: "#333333",
+                  fontStyle:tempData[1]==1?"italic":""
                 })
               }
             }
@@ -81,13 +84,14 @@
               if(j == data[i].column.length - 1){
                 tempArray.push({
                   value:tempData[0],
-                  bgColor:"#e3e3e3",
-                  color:"#333333"
+                  bgColor: tempData[1]==1?bgColor:"#e3e3e3",
+                  color:"#333333",
+                  fontStyle:tempData[1]==1?"italic":""
                 })
               }else{
                 tempArray.push({
                   value:tempData[0],
-                  bgColor:"white",
+                  bgColor: tempData[1]==1?bgColor:"white",
                   color:"#333333",
                   fontStyle:tempData[1]==1?"italic":""
                 })
@@ -100,7 +104,7 @@
               {
                 value:"",
                 bgColor:"white",
-                color:"white"
+                color:"white",
               },
               {
                 value:"占比",
@@ -112,15 +116,18 @@
               let tempData = data[i].column[j];
               if(j == data[i].column.length - 1) {
                 tempArray.push({
-                  value: tempData,
-                  bgColor: "#e3e3e3",
-                  color: "#333333"
+                  value: tempData[0],
+                  bgColor: tempData[1]==1?bgColor:"#e3e3e3",
+                  color: "#333333",
+                  fontStyle:tempData[1]==1?"italic":""
                 })
               }else{
                 tempArray.push({
-                  value: tempData,
-                  bgColor: "white",
-                  color: "#333333"
+                  value: tempData[0],
+                  bgColor: tempData[1]==1?bgColor:"white",
+                  color: "#333333",
+                  fontStyle:tempData[1]==1?"italic":""
+
                 })
               }
             }
@@ -156,13 +163,17 @@
                 tempArray.push({
                   childData: [
                     {
-                      value: tempData1,
-                      bgColor: "#e3e3e3",
-                      color: "#333333"
+                      value: tempData1[0],
+                      bgColor: tempData1[1]==1?bgColor:"#e3e3e3",
+                      color: "#333333",
+                      fontStyle:tempData1[1]==1?"italic":""
+
                     }, {
-                      value: tempData2,
-                      bgColor: "#e3e3e3",
-                      color: "#333333"
+                      value: tempData2[0],
+                      bgColor: tempData2[1]==1?bgColor:"#e3e3e3",
+                      color: "#333333",
+                      fontStyle:tempData2[1]==1?"italic":""
+
                     }
                   ]
                 });
@@ -170,13 +181,15 @@
                 tempArray.push({
                   childData: [
                     {
-                      value: tempData1,
-                      bgColor: "white",
-                      color: "#333333"
+                      value: tempData1[0],
+                      bgColor: tempData1[1]==1?bgColor:"white",
+                      color: "#333333",
+                      fontStyle:tempData1[1]==1?"italic":""
                     }, {
-                      value: tempData2,
-                      bgColor: "white",
-                      color: "#333333"
+                      value: tempData2[0],
+                      bgColor: tempData2[1]==1?bgColor:"white",
+                      color: "#333333",
+                      fontStyle:tempData2[1]==1?"italic":""
                     }
                   ]
                 });

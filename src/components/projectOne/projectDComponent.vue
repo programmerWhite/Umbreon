@@ -4,7 +4,7 @@
       <div class="project-h2">{{menuName}}</div>
       <div class="table-container-1-div">
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData"></table-component>
-        <div class="pro-button-line-div" v-if="roleId==3 && projectType">
+        <div class="pro-button-line-div" v-if="roleId==3 || roleId==2 && projectType">
           <button class="desc-button-style" @click="editProTable(true)" v-show="!projectTableEditSwitch">编辑</button>
           <button class="desc-button-style" @click="editProTable(false)" v-show="projectTableEditSwitch">取消</button>
           <button class="desc-button-style" v-show="projectTableEditSwitch" @click="saveTableData">确认</button>

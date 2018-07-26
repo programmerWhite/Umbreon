@@ -150,10 +150,8 @@
             crossDomain:true,
             contentType:false,
             success:function (data) {
-              var userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-              userInfo.photograph = data.newURL;
-              sessionStorage.setItem('userInfo',JSON.stringify(userInfo));
-
+              This.userInfo.photograph = data.newURL;
+              sessionStorage.setItem('userInfo',JSON.stringify(This.userInfo));
               This.userPhoto = data.newURL;
             },
             error:function () {

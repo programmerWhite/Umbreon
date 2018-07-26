@@ -112,7 +112,7 @@
       dealStyles:function (data) {
         if(data.styles){
           if(data.styles.xie){
-            return "font-style: italic;";
+            return "font-style: italic;background-color:#cccccc";
           }
         }
         return "";
