@@ -13,7 +13,10 @@
                 <router-link to="/addNewProject">新增项目</router-link>
               </li>
               <li v-if="roleId != 4 && roleId != 5 && roleId != 1" :class="currentMenu == 3?'current-menu-one':''" @click="clickMenu(3)">
-                <router-link to="/allProject/1">现有项目</router-link>
+                <router-link to="/allProject/1">
+                  <span v-if="roleId == 2">复查现有项目</span>
+                  <span v-else>编辑现有项目</span>
+                </router-link>
               </li>
               <li v-if="roleId != 1" :class="currentMenu == 4?'current-menu-one':''" @click="clickMenu(4)">
                 <router-link to="/allProject/2">项目成本分析</router-link>
