@@ -15,7 +15,10 @@
           <div class="page-one-div"  @click="clickMenu(3)">
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">
-              <div class="name-text">现有项目</div>
+              <div class="name-text">
+                <span v-if="roleId == 2">复查现有项目</span>
+                <span v-else>编辑现有项目</span>
+              </div>
               <div class="desc-text">修改已有项目的概述及数据</div>
             </div>
           </div>

@@ -5,6 +5,7 @@
            v-for="(item1,key1) in item"
            :contenteditable="item1.edit && editStatus"
            @blur="blurDivInput"
+           :class="sortLineStyle(item1.value,key1)"
            :cows="key"
            :cols="key1"
            :style="dealStyles(item1)"
@@ -118,6 +119,22 @@
           }
         }
         return "";
+      },
+      sortLineStyle:function (value,index) {
+        if(index == 0) {
+          if (value.indexOf('.') != -1) {
+            return "text-right";
+          } else {
+            var reg = new RegExp("[a-zA-Z]");
+            if (reg.test(value)) {
+              return "text-right";
+            } else {
+              return "text-left";
+            }
+          }
+        }else if(index == 1) {
+          return "text-left";
+        }
       }
     }
   }
@@ -174,5 +191,16 @@
     padding:0 10px;
     font-weight: 800;
   }
-
+  .text-left{
+    justify-content: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+  }
+  .text-right{
+    justify-content: flex-end;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+  }
 </style>
