@@ -147,7 +147,7 @@
               value:this.baseData.totalRow.all_totalPrice
             },{
               edit:false,
-              value:this.baseData.totalRow.all_totalPrice
+              value:this.baseData.totalRow.all_perSquarePrice
             },{
               edit:false,
               value:this.baseData.totalRow.all_percentage

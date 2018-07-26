@@ -2,8 +2,8 @@
     <div class="home-page-div">
       <head-component></head-component>
       <div class="home-content-div" :class="roleId != 2?'':'two-part'">
-        <router-link to="/addNewProject" v-if="roleId == 3">
-          <div class="page-one-div">
+        <router-link to="/addNewProject" v-if="roleId == 3"  >
+          <div class="page-one-div" @click="clickMenu(2)">
             <img class="img-style" src="../assets/homeImg/11.png"/>
             <div class="project-text">
               <div class="name-text">新增项目</div>
@@ -12,7 +12,7 @@
           </div>
         </router-link>
         <router-link to="/allProject/1" v-if="roleId == 3 || roleId == 2">
-          <div class="page-one-div">
+          <div class="page-one-div"  @click="clickMenu(3)">
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">
               <div class="name-text">现有项目</div>
@@ -21,7 +21,7 @@
           </div>
         </router-link>
         <router-link to="/allProject/2">
-          <div class="page-one-div">
+          <div class="page-one-div"  @click="clickMenu(4)">
             <img class="img-style" src="../assets/homeImg/33.png"/>
             <div class="project-text">
               <div class="name-text">项目成本分析</div>
@@ -44,6 +44,13 @@
       this.userName = userInfo.referredName;
       this.userRole = userInfo.name;
       this.roleId = userInfo.roleId;
+    },
+    methods:{
+      clickMenu:function (num) {
+        console.log(num+"//")
+        this.currentMenu = num;
+        sessionStorage.setItem('pageNum',num);
+      }
     }
 
   }
