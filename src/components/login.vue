@@ -36,6 +36,7 @@
   .home-container-div{
     height: 580px;
     width: 100%;
+    min-width: 1200px;
     position: relative;
   }
   .home-img-div{

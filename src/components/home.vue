@@ -63,7 +63,7 @@
   .home-content-div{
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 1200px;
     margin: 0 auto;
@@ -72,6 +72,7 @@
   .page-one-div{
     width: 390px;
     height: 440px;
+    margin-right: 10px;
     border-radius: 10px;
     overflow: hidden;
     background-color: #eeeeee;

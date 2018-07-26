@@ -15,6 +15,7 @@
   .foot-div{
     height: 100px;
     width: 100%;
+    min-width: 1200px;
     background-color: white;
   }
   .foot-div p{
