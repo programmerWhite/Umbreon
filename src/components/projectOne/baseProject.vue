@@ -11,7 +11,7 @@
         <table-component :tableConfig="tableConfig" @dataChange="dataChange" v-if="tableConfig.projectTableData.length > 0"></table-component>
 
         <div class="picture-scroll-div" >
-          <div class="change-photo-div" @click="popAddProShow=true" v-if="roleId==3 && projectType">修改图片</div>
+          <div class="change-photo-div" @click="popAddProShow=true" v-if="roleId==3 || roleId==2&& projectType">修改图片</div>
           <picture-scroll :scrollImgData="imgArray"></picture-scroll>
         </div>
         <div class="pro-desc-outer-div">
@@ -345,7 +345,7 @@
                 changeText: "项目内容修改成功",
                 button1: "确认",
                 button1CallBack:function () {
-
+                    This.$router.go(0);
                 },
               });
             }

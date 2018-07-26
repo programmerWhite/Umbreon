@@ -17,6 +17,7 @@
 
 <script>
   import tableComponent from "@/components/common/tableComponent"
+  import $ from "jquery"
 
   export default {
         name: "project-d-component",
@@ -85,23 +86,48 @@
         var This = this;
         var tempData = JSON.stringify(this.tableConfig.projectTableData);
         var recordsCode = tempData;
-        this.axios({
+
+        $.ajax({
           url:this.$store.state.other.ipAddress + '/manages/manageprojects!updateOneStageDMsg.action',
-          method:"post",
-          params:{
+          type:"post",
+          dataType:"json",
+          data:{
             projectSD_id:this.baseData.id,
             recordsCode:recordsCode,
+            token: sessionStorage.getItem('token')
+          },
+          xhrFields:{
+            withCredentials: true
+          },
+          crossDomain:true,
+          success:function () {
+            This.$store.dispatch("dialogParameter", {
+              type: "alert",
+              changeText: "内容修改成功",
+              button1: "确认",
+              button1CallBack: function () {
+                This.$emit("reloadPage");
+              },
+            });
           }
-        }).then(function () {
-          This.$store.dispatch("dialogParameter", {
-            type: "alert",
-            changeText: "内容修改成功",
-            button1: "确认",
-            button1CallBack:function () {
-              This.$emit("reloadPage");
-            },
-          });
         });
+        // this.axios({
+        //   url:this.$store.state.other.ipAddress + '/manages/manageprojects!updateOneStageDMsg.action',
+        //   method:"post",
+        //   params:{
+        //     projectSD_id:this.baseData.id,
+        //     recordsCode:recordsCode,
+        //   }
+        // }).then(function () {
+        //   This.$store.dispatch("dialogParameter", {
+        //     type: "alert",
+        //     changeText: "内容修改成功",
+        //     button1: "确认",
+        //     button1CallBack:function () {
+        //       This.$emit("reloadPage");
+        //     },
+        //   });
+        // });
       }
     }
   }

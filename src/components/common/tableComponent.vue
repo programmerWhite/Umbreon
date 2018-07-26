@@ -154,7 +154,10 @@
               styleString += "width:"+tempData.width+"px;";
             }
             if(tempData.textAlign){
-              styleString += "justify-content:"+tempData.textAlign+";text-align:"+tempData.textAlign+";";
+
+              var direction = tempData.textAlign=="left"&&"flex-start"||tempData.textAlign=="center"&&"center"||tempData.textAlign=="right"&&"flex-end"
+              styleString += "justify-content:"+direction+";text-align:"+tempData.textAlign+";";
+
             }
             return styleString;
           }else{
