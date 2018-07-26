@@ -26,7 +26,7 @@
       props:["menuData","menuClick"],
       data(){
           return{
-            currentMenuId:"",
+            currentMenuId:"staticMenu-2",
           }
       },
       mounted:function () {

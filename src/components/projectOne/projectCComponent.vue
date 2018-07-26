@@ -91,6 +91,7 @@
                   changeText: "内容修改成功",
                   button1: "确认",
                   button1CallBack:function () {
+                    This.$router.go(0);
                     This.$emit("reloadPage");
                   },
                 });
