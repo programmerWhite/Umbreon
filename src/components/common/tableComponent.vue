@@ -72,9 +72,22 @@
         },
         /*删除一行数据*/
         deleteLine:function (index) {
-          this.tempProjectData.splice(index,1);
-          sessionStorage.setItem('tempProjectData',JSON.stringify(this.tempProjectData));
-          this.$emit('dataChange',this.tempProjectData);
+          var This = this;
+          this.$store.dispatch("dialogParameter", {
+            type: "confirm",
+            changeText: "确认删除这一行内容？",
+            button1: "确认",
+            button2: "取消",
+            button1CallBack:function () {
+              This.tempProjectData.splice(index,1);
+              sessionStorage.setItem('tempProjectData',JSON.stringify(This.tempProjectData));
+              This.$emit('dataChange',This.tempProjectData);
+            },
+            button2CallBack:function () {
+
+            }
+          });
+
         },
         /*深复制方法*/
         cloneData:function (obj) {
