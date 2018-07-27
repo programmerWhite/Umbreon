@@ -271,7 +271,7 @@
           var reg = /^\d+(\.\d+)?$/;
           if(!!reg.exec(value)){
             value = parseFloat(value);
-            value = value.toFixed(2);
+            // value = value.toFixed(2);
             value = parseFloat(value);
             value = value.toLocaleString();
             return value;//返回的是字符串23,245.12保留2位小数
