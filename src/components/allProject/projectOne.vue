@@ -122,7 +122,7 @@
     color: #ed6b1a;
     font-size: 14px;
     display: inline-block;
-    width: 60px;
+    width: 80px;
     text-align: right;
   }
   .arrow-img {
