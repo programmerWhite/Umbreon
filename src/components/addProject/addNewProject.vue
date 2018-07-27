@@ -42,7 +42,7 @@
         </div>
         <div class="input-line-div">
           <div class="add-photo-container-div">
-            <p v-if="imgArray.length == 0">添加项目介绍图片(940px x 290px)</p>
+            <p v-if="imgArray.length == 0">添加项目图片</p>
             <div v-else class="img-container-div">
               <div class="img-photo-one" v-for="(item,key) in imgArray" :key="key">
                 <img class="upload-img" :src="item" />
@@ -56,7 +56,7 @@
         </div>
         <div class="add-pro-button-line">
           <button class="button-style" @click="backToProjectAll">取消</button>
-          <button class="button-style" @click="addNewProject">确定</button>
+          <button class="button-style" @click="addNewProject">保存</button>
         </div>
       </div>
     </div>
@@ -157,17 +157,17 @@
           return false;
         }
 
-        if(description.length < 50 || description.length > 500){
-          this.$store.dispatch("dialogParameter", {
-            type: "alert",
-            changeText: "项目描述内容请在50 到 500 字符之间。",
-            button1: "确认",
-            button1CallBack:function () {
-
-            },
-          });
-          return false;
-        }
+        // if(description.length < 50 || description.length > 500){
+        //   this.$store.dispatch("dialogParameter", {
+        //     type: "alert",
+        //     changeText: "项目描述内容请在50 到 500 字符之间。",
+        //     button1: "确认",
+        //     button1CallBack:function () {
+        //
+        //     },
+        //   });
+        //   return false;
+        // }
 
         if(cityName == "" || cityName == " "){
           this.$store.dispatch("dialogParameter", {
@@ -382,9 +382,10 @@
     text-align: right;
     font-size: 14px;
     padding: 0 10px;
+    padding-left: 20px;
   }
   .input-style{
-    height: 40px;
+    height: 30px;
     padding-left: 20px;
     box-sizing: border-box;
     border: 1px solid #cccccc;
@@ -414,7 +415,6 @@
     height: 16px;
     width: 16px;
     border-radius: 2px;
-    margin-left: 10px;
     cursor: pointer;
     background: url("../../assets/common/noChoice.png");
   }

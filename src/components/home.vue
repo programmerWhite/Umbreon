@@ -7,7 +7,7 @@
             <img class="img-style" src="../assets/homeImg/11.png"/>
             <div class="project-text">
               <div class="name-text">新增项目</div>
-              <div class="desc-text">新增项目的概述及数据</div>
+              <div class="desc-text">在此输入新添项目的慨述和成本数据</div>
             </div>
           </div>
         </router-link>
@@ -16,10 +16,13 @@
             <img class="img-style" src="../assets/homeImg/22.png"/>
             <div class="project-text">
               <div class="name-text">
-                <span v-if="roleId == 2">复查现有项目</span>
-                <span v-else>编辑现有项目</span>
+                <span v-if="roleId == 2">复查项目</span>
+                <span v-else>编辑项目</span>
               </div>
-              <div class="desc-text">修改已有项目的概述及数据</div>
+              <div class="desc-text">
+                <span v-if="roleId == 2">在此复查、修改、及批准项目的慨述和成本数据</span>
+                <span v-else>在此输入及修改未复查批准的项目的慨述和成本数据</span>
+              </div>
             </div>
           </div>
         </router-link>
@@ -28,7 +31,7 @@
             <img class="img-style" src="../assets/homeImg/33.png"/>
             <div class="project-text">
               <div class="name-text">项目成本分析</div>
-              <div class="desc-text">查看审核通过的项目</div>
+              <div class="desc-text">在此查看已复查批准的项目的成本分析</div>
             </div>
           </div>
         </router-link>
@@ -89,7 +92,7 @@
     font-size: 24px;
   }
   .desc-text{
-    font-size: 20px;
+    font-size: 18px;
     color: #2b3541;
     margin-top: 10px;
   }

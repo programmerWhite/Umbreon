@@ -104,7 +104,16 @@
                       name:'userManage',
                       params:{}
                     });
+                  }else if(data.userinfo.roleId == 4 || data.userinfo.roleId == 5){
+                    sessionStorage.setItem('pageNum',4);
+                    This.$router.push({
+                      name:'allProject',
+                      params:{
+                        type:"2"
+                      }
+                    });
                   }else{
+
                     This.$router.push({
                       name:'home',
                       params:{}

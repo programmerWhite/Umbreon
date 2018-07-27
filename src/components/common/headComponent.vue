@@ -6,7 +6,7 @@
         </div>
         <div class="menu-list-style">
             <ul class="level-one-ul">
-              <li v-if="roleId != 1" :class="currentMenu == 1?'current-menu-one':''" @click="clickMenu(1)">
+              <li v-if="roleId != 1 && roleId != 4 && roleId != 5" :class="currentMenu == 1?'current-menu-one':''" @click="clickMenu(1)">
                 <router-link to="/home">首页</router-link>
               </li>
               <li v-if="roleId == 3" :class="currentMenu == 2?'current-menu-one':''" @click="clickMenu(2)">
@@ -14,8 +14,8 @@
               </li>
               <li v-if="roleId != 4 && roleId != 5 && roleId != 1" :class="currentMenu == 3?'current-menu-one':''" @click="clickMenu(3)">
                 <router-link to="/allProject/1">
-                  <span v-if="roleId == 2">复查现有项目</span>
-                  <span v-else>编辑现有项目</span>
+                  <span v-if="roleId == 2">复查项目</span>
+                  <span v-else>编辑项目</span>
                 </router-link>
               </li>
               <li v-if="roleId != 1" :class="currentMenu == 4?'current-menu-one':''" @click="clickMenu(4)">
