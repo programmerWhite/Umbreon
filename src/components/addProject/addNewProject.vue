@@ -120,6 +120,11 @@
         }).then(function (response) {
             var data = response.data;
             This.dataZone = data.segment;
+            for(var item of This.dataZone){
+              if(!!item.isAcquiescent){
+                item.isVisible = 1;
+              }
+            }
 
             This.tableConfig.projectTableData = JSON.parse(data.commonB0);
         });
@@ -382,7 +387,8 @@
     text-align: right;
     font-size: 14px;
     padding: 0 10px;
-    padding-left: 20px;
+    padding-left: 10px;
+    word-break: keep-all;
   }
   .input-style{
     height: 30px;
